@@ -2,20 +2,20 @@
     <a href='./CONTRIBUTING.ja.md'>Japanese Version</a>
 </p>
 
-## Thank you for your interest in OSS Blog.
+## Thank you for your interest in Tech.museum.
 
-OSS Blog is an open-source project-style technical article submission site.
-The unique feature of OSS Blog is that articles are submitted and updated via Pull Requests on GitHub. This helps prevent inaccuracies or outdated information in the articles.
+Tech.museum is an open-source project-style technical article submission site.
+The unique feature of Tech.museum is that articles are submitted and updated via Pull Requests on GitHub. This helps prevent inaccuracies or outdated information in the articles.
 
 ## Setup
 
 1. Fork this repository.
-   `https://github.com/illionillion/oss-blog`
+   `https://github.com/illionillion/tech-museum`
 
 2. Clone this repository.
 
 ```
-git clone https://github.com/illionillion/oss-blog
+git clone https://github.com/illionillion/tech-museum
 ```
 
 3. Open the cloned repository and run `pnpm install` to install the dependencies.
@@ -61,4 +61,4 @@ When creating commits, please use one of the following types and follow the conv
 
 ## License
 
-`OSS Blog` is released under the MIT License. For more details, see [LICENSE](./LICENSE).
+`Tech.museum` is released under the MIT License. For more details, see [LICENSE](./LICENSE).

@@ -15,18 +15,18 @@ type Commit = Awaited<
 >["data"][number]
 type Author = Commit["author"]
 
-const COMMON_PARAMS = { owner: "illionillion", repo: "oss-blog" }
+const COMMON_PARAMS = { owner: "illionillion", repo: "tech-museum" }
 
 config()
 
 const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN })
 
 const getMetadataPaths: p.RequiredRunner = () => async (_, s) => {
-  s.start("Getting the OSS Blog metadata paths")
+  s.start("Getting the Tech.museum metadata paths")
 
   const metadataPaths = await glob("contents/**/*.md")
 
-  s.stop("Got the OSS Blog metadata paths")
+  s.stop("Got the Tech.museum metadata paths")
 
   return metadataPaths
 }
@@ -107,7 +107,7 @@ const getAuthors: p.RequiredRunner<
   [string[]],
   Promise<Record<string, Author[]>>
 > = (paths) => async (_, s) => {
-  s.start("Getting the OSS Blog contributors")
+  s.start("Getting the Tech.museum contributors")
 
   const authorMap: Record<string, Author[]> = {}
 
@@ -136,13 +136,13 @@ const getAuthors: p.RequiredRunner<
     }),
   )
 
-  s.stop("Got the OSS Blog contributors")
+  s.stop("Got the Tech.museum contributors")
 
   return authorMap
 }
 
 const main = async () => {
-  p.intro(c.magenta("Generating OSS Blog contributors"))
+  p.intro(c.magenta("Generating Tech.museum contributors"))
 
   const s = p.spinner()
 

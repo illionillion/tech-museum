@@ -5,7 +5,7 @@ import { AppProvider } from "@/provider"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "OSS Blog",
+  title: "Tech.museum",
   description: "OSSで技術ブログを革新する",
 }
 

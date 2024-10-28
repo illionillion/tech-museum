@@ -21,11 +21,11 @@ type Content = {
 }
 
 const getPaths: p.RequiredRunner = () => async (_, s) => {
-  s.start("Getting the OSS Blog article paths")
+  s.start("Getting the Tech.museum article paths")
 
   const articlePaths = await glob("contents/**/*.md")
 
-  s.stop("Got the OSS Blog article paths")
+  s.stop("Got the Tech.museum article paths")
 
   return articlePaths
 }
@@ -151,7 +151,7 @@ const generateSearchContent: p.RequiredRunner =
   }
 
 program.action(async () => {
-  p.intro(c.magenta(`Generating OSS Blog document search content`))
+  p.intro(c.magenta(`Generating Tech.museum document search content`))
 
   const s = p.spinner()
 

@@ -14,9 +14,9 @@ interface Props {
 
 export const dynamicParams = false
 
-export const generateMetadata = generateArticleMetadata("oss-blog")
+export const generateMetadata = generateArticleMetadata("tech-museum")
 
-export const generateStaticParams = generateStaticArticleParams("oss-blog")
+export const generateStaticParams = generateStaticArticleParams("tech-museum")
 
 const Page = async ({ params }: Props) => {
   const { slug } = params
@@ -25,7 +25,8 @@ const Page = async ({ params }: Props) => {
     return <Text>Home page or default content</Text>
   }
 
-  const { content, metadata } = await getStaticArticleContent("oss-blog")(slug)
+  const { content, metadata } =
+    await getStaticArticleContent("tech-museum")(slug)
 
   return (
     <Layout>

@@ -35,7 +35,7 @@ export default function Home() {
         ]}
       >
         <Heading color="white" as="h1" fontSize={{ base: "6xl", md: "xl" }}>
-          OSSBlogへようこそ
+          Tech.museumへようこそ
         </Heading>
         <Text color="white">
           オープンソースの力で、より良い技術ブログを一緒に作り上げましょう
@@ -44,7 +44,7 @@ export default function Home() {
           m="auto"
           as="a"
           target="_blank"
-          href="https://github.com/illionillion/oss-blog/blob/main/CONTRIBUTING.ja.md"
+          href="https://github.com/illionillion/tech-museum/blob/main/CONTRIBUTING.ja.md"
         >
           今すぐ始める
         </Button>
@@ -92,7 +92,7 @@ const FeatureCard = () => {
   return (
     <>
       <Heading as="h2" fontSize={{ base: "5xl", md: "lg" }} m="auto">
-        OSSBlogの特徴
+        Tech.museumの特徴
       </Heading>
       <SimpleGrid w="full" columns={{ base: 2, md: 1 }} gap="md">
         {features.map((feature) => (
@@ -120,7 +120,7 @@ const HowToJoin = () => {
         "まだアカウントをお持ちでない場合は、Githubアカウントを作成してください。",
     },
     {
-      description: "OSSBlogのリポジトリをフォークする",
+      description: "Tech.museumのリポジトリをフォークする",
     },
     {
       description: "ローカル環境にクローンし、新しい記事を作成する",
@@ -154,12 +154,12 @@ const HowToJoin = () => {
 const QuestionAccordion = () => {
   const questions = [
     {
-      question: "OSSBlogで記事を書くにはどうすればいいですか？",
+      question: "Tech.museumで記事を書くにはどうすればいいですか？",
       answer:
         "まだアカウントをお持ちでない場合は、Githubアカウントを作成してください。",
     },
     {
-      question: "OSSBlogで扱うトピックに制限はありますか",
+      question: "Tech.museumで扱うトピックに制限はありますか",
       answer:
         "ありません。作成したいトピックが存在しない場合は、あなた自身でトピックを作成してください。",
     },
@@ -182,7 +182,7 @@ const CommunityIntroduction = () => {
   return (
     <Container textAlign="center" w="full" margin="auto">
       <Heading as="h1" fontSize={{ base: "5xl", md: "xl" }}>
-        OSSBlogコミュニティに参加しよう
+        Tech.museumコミュニティに参加しよう
       </Heading>
       <Text>
         あなたの知識と経験を共有し、他の開発者から学び、一緒に成長しましょう
@@ -191,7 +191,7 @@ const CommunityIntroduction = () => {
         m="auto"
         as="a"
         target="_blank"
-        href="https://github.com/illionillion/oss-blog/"
+        href="https://github.com/illionillion/tech-museum/"
       >
         Githubリポジトリ
       </Button>

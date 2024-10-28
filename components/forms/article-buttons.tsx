@@ -11,7 +11,7 @@ import type { ArticleMetadata } from "article"
 import Link from "next/link"
 import { useSession } from "next-auth/react"
 import React from "react"
-import type { FC } from "react";
+import type { FC } from "react"
 
 interface ArticleButtonsProps {
   metadata: ArticleMetadata | undefined
@@ -68,7 +68,7 @@ export const ArticleButtons: FC<ArticleButtonsProps> = ({ metadata }) => {
         boxSize="10"
         as={Link}
         target="_blank"
-        href="https://github.com/illionillion/oss-blog/issues/new?template=feature_request_article.yml"
+        href="https://github.com/illionillion/tech-museum/issues/new?template=feature_request_article.yml"
         icon={<InfoIcon />}
       />
       <IconButton
@@ -78,7 +78,7 @@ export const ArticleButtons: FC<ArticleButtonsProps> = ({ metadata }) => {
         boxSize="10"
         as={Link}
         target="_blank"
-        href={`https://github.com/illionillion/oss-blog/tree/main/contents/${metadata?.slug}.md`}
+        href={`https://github.com/illionillion/tech-museum/tree/main/contents/${metadata?.slug}.md`}
         icon={<CodeIcon />}
       />
       <IconButton

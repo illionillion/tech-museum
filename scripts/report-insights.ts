@@ -12,7 +12,7 @@ if (!GITHUB_TOKEN) {
 }
 
 const REPO_OWNER = "illionillion"
-const REPO_NAME = "oss-blog"
+const REPO_NAME = "tech-museum"
 const TOP_N_CONTRIBUTORS = 5
 const OUTPUT_FILE_PATH = "i18n/contributors.json"
 
