@@ -2,20 +2,20 @@
     <a href='./CONTRIBUTING.md'>英語版</a>
 </p>
 
-## OSS Blog に興味を持ってくださりありがとうございます。
+## Tech.museum に興味を持ってくださりありがとうございます。
 
-OSS Blogはオープンソースプロジェクト形式技術記事投稿サイトです。
-OSS Blogの特徴は、記事の投稿や更新などをGithub上のPull Requestで行います。これにより、記事の内容が間違っていたり、古い情報のままになること抑えることができます。
+Tech.museumはオープンソースプロジェクト形式技術記事投稿サイトです。
+Tech.museumの特徴は、記事の投稿や更新などをGithub上のPull Requestで行います。これにより、記事の内容が間違っていたり、古い情報のままになること抑えることができます。
 
 ## セットアップ
 
 1. このリポジトリをフォークします。
-   `https://github.com/illionillion/oss-blog`
+   `https://github.com/illionillion/tech-museum`
 
 2. このリポジトリをクローンします。
 
 ```
-git clone https://github.com/illionillion/oss-blog
+git clone https://github.com/illionillion/tech-museum
 ```
 
 3. クローンしたリポジトリ開いて`pnpm install`を実行し依存関係をインストールします。
@@ -62,4 +62,4 @@ git clone https://github.com/illionillion/oss-blog
 
 ## ライセンス
 
-`OSS Blog`はMITライセンスの下で公開されています。詳細については、[LICENSE](./LICENSE)を参照してください。
+`Tech.museum`はMITライセンスの下で公開されています。詳細については、[LICENSE](./LICENSE)を参照してください。

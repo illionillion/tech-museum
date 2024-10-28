@@ -5,19 +5,19 @@ export const Footer = () => {
   const links = [
     { href: "/welcome", label: "About" },
     {
-      href: "https://github.com/illionillion/oss-blog/blob/main/CONTRIBUTING.ja.md",
+      href: "https://github.com/illionillion/tech-museum/blob/main/CONTRIBUTING.ja.md",
       label: "貢献する",
       isBlank: true,
     },
     {
-      href: "https://github.com/illionillion/oss-blog/blob/main/CODE_OF_CONDUCT.ja.md",
+      href: "https://github.com/illionillion/tech-museum/blob/main/CODE_OF_CONDUCT.ja.md",
       label: "行動規範",
       isBlank: true,
     },
   ]
 
   const community = [
-    { href: "https://github.com/illionillion/oss-blog/", label: "GitHub" },
+    { href: "https://github.com/illionillion/tech-museum/", label: "GitHub" },
   ]
 
   return (
@@ -38,7 +38,7 @@ export const Footer = () => {
       >
         <Box m={{ md: "0 auto" }} textAlign={{ base: "left", md: "center" }}>
           <Heading size="md" py="md">
-            OSSBlog
+            Tech.museum
           </Heading>
           <Text>オープンソースの力で、より良い技術ブログを</Text>
         </Box>
@@ -72,7 +72,7 @@ export const Footer = () => {
         </Box>
       </Flex>
       <Text m="0 auto" py="md" textAlign="center">
-        © 2024 OSSBlog. All rights reserved.
+        © 2024 Tech.museum. All rights reserved.
       </Text>
     </Box>
   )

@@ -11,7 +11,7 @@ const Page = () => {
           Contributors
         </Heading>
         <Text p="md">
-          OSSBlogに時間・労力・思考を提供してくれた素晴らしいエンジニア。彼らの貢献に深く感謝します。
+          Tech.museumに時間・労力・思考を提供してくれた素晴らしいエンジニア。彼らの貢献に深く感謝します。
         </Text>
         <TopContributor />
         <ContributorList />

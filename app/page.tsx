@@ -63,7 +63,7 @@ const Banner: FC = () => {
           <Button
             as="a"
             target="_blank"
-            href="https://github.com/illionillion/oss-blog/blob/main/CONTRIBUTING.ja.md"
+            href="https://github.com/illionillion/tech-museum/blob/main/CONTRIBUTING.ja.md"
           >
             はじめる
           </Button>
@@ -90,7 +90,7 @@ const GithubButtons: FC = () => {
             leftIcon={<InfoIcon />}
             as="a"
             target="_blank"
-            href="https://github.com/illionillion/oss-blog/issues"
+            href="https://github.com/illionillion/tech-museum/issues"
           >
             Issueを見る
           </Button>
@@ -100,7 +100,7 @@ const GithubButtons: FC = () => {
             leftIcon={<GitPullRequestIcon />}
             as="a"
             target="_blank"
-            href="https://github.com/illionillion/oss-blog/pulls"
+            href="https://github.com/illionillion/tech-museum/pulls"
           >
             Pull Requestを見る
           </Button>

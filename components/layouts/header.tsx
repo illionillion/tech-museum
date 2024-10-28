@@ -77,12 +77,18 @@ export const Header: FC<HeaderProps> = ({ ...rest }) => {
       zIndex="guldo"
       {...rest}
     >
-      <HStack w="full" maxW="9xl" py="3" px={{ base: "lg", md: "md" }}>
+      <HStack
+        w="full"
+        maxW="9xl"
+        py="3"
+        px={{ base: "lg", md: "md" }}
+        gap={{ base: "md", md: "sm" }}
+      >
         <HStack
           as={Link}
           gap="sm"
           href="/"
-          aria-label="OSS Blog"
+          aria-label="Tech.museum"
           _hover={{ opacity: 0.7 }}
           transitionProperty="opacity"
           transitionDuration="slower"
@@ -92,7 +98,7 @@ export const Header: FC<HeaderProps> = ({ ...rest }) => {
         >
           <GitForkIcon color="primary" fontSize="4xl" />
           <Heading as="h1" size="md">
-            OSS Blog
+            Tech.ms
           </Heading>
         </HStack>
         <Spacer />

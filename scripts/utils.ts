@@ -7,7 +7,7 @@ import { format, resolveConfig } from "prettier"
 
 const COMMON_PARAMS = {
   owner: "illionillion",
-  repo: "oss-blog",
+  repo: "tech-museum",
   path: "",
   ref: "main",
 }

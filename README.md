@@ -1,14 +1,14 @@
 <div style="display: flex;">
-    <img src="./public/oss-blog-logo.png" width="40" height="40" style="display: block; margin-right: 16px;">
-    <h1>OSS Blog</h1>
+    <img src="./public/tech-museum-logo.png" width="40" height="40" style="display: block; margin-right: 16px;">
+    <h1>Tech.museum</h1>
 </div>
 
-`OSS Blog`は**みんなで記事を作る**ことに焦点を当てた全く新しい技術記事サイトです。
+`Tech.museum`は**みんなで記事を作る**ことに焦点を当てた全く新しい技術記事サイトです。
 <a href="#english-version">English version is available!!</a>
 
 ## 概要
 
-従来の技術記事サイトは、基本的に1人の著者が記事を書いて他の人がそれを読むという形式でした。しかし、その形式だと記事の内容が間違っていたり、古くなっていた場合に著者しか編集はできないので更新されないまま残ってしまうなどこれ以外にもさまざまな問題があると感じていました。そこでこの問題を解決するために、OSS(Open Source Software)の仕組みを活用してみんなが著者であり、読者である技術記事サイト`OSS Blog`を開発することを決めました。
+従来の技術記事サイトは、基本的に1人の著者が記事を書いて他の人がそれを読むという形式でした。しかし、その形式だと記事の内容が間違っていたり、古くなっていた場合に著者しか編集はできないので更新されないまま残ってしまうなどこれ以外にもさまざまな問題があると感じていました。そこでこの問題を解決するために、OSS(Open Source Software)の仕組みを活用してみんなが著者であり、読者である技術記事サイト`Tech.museum`を開発することを決めました。
 
 ## このサイトが解決できる問題
 
@@ -19,7 +19,7 @@
 
 ## 従来の技術記事サイトとの比較
 
-| 比較点     | OSS Blog       | Q              | Z              |
+| 比較点     | Tech.museum    | Q              | Z              |
 | ---------- | -------------- | -------------- | -------------- |
 | 記事の作成 | みんなで作成   | 1人で作成      | 1人で作成      |
 | 記事の編集 | みんなで編集   | 著者のみ       | 著者のみ       |
@@ -48,15 +48,15 @@
 <div id="english-version"></div>
 
 <div style="display: flex;">
-    <img src="./public/oss-blog-logo.png" width="40" height="40" style="display: block; margin-right: 16px;">
-    <h1>OSS Blog</h1>
+    <img src="./public/tech-museum-logo.png" width="40" height="40" style="display: block; margin-right: 16px;">
+    <h1>Tech.museum</h1>
 </div>
 
-`OSS Blog` is a completely new technology article site that focuses on **creating articles together**.
+`Tech.museum` is a completely new technology article site that focuses on **creating articles together**.
 
 ## Overview
 
-Traditional technical article sites typically involve a single author writing an article for others to read. However, if the article contains inaccuracies or becomes outdated, only the author can edit it, which means the incorrect or old information may remain unchanged. To solve this issue, we decided to develop `OSS Blog`, a technical article site where everyone is both an author and a reader, utilizing the concept of OSS (Open Source Software).
+Traditional technical article sites typically involve a single author writing an article for others to read. However, if the article contains inaccuracies or becomes outdated, only the author can edit it, which means the incorrect or old information may remain unchanged. To solve this issue, we decided to develop `Tech.museum`, a technical article site where everyone is both an author and a reader, utilizing the concept of OSS (Open Source Software).
 
 ## Problems this site can solve
 
@@ -67,7 +67,7 @@ Traditional technical article sites typically involve a single author writing an
 
 ## Comparison with traditional technical article sites
 
-| Comparison Point  | OSS Blog               | Q                      | Z                      |
+| Comparison Point  | Tech.museum            | Q                      | Z                      |
 | ----------------- | ---------------------- | ---------------------- | ---------------------- |
 | Article Creation  | Created by everyone    | Created by one person  | Created by one person  |
 | Article Editing   | Edited by everyone     | Only the author        | Only the author        |

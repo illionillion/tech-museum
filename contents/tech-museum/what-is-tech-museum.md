@@ -1,10 +1,10 @@
 ---
-title: 技術記事サイトのOSS Blogとは
-description: OSS Blogとは何なのかや何が他の技術記事サイトと異なるのかについて解説します。
+title: 技術記事サイトのTech.museumとは
+description: Tech.museumとは何なのかや何が他の技術記事サイトと異なるのかについて解説します。
 keyword:
   - 技術記事
   - アプトプット
-  - OSS Blog
+  - Tech.museum
 contributors:
   - id: 60034520
     login: illionillion
@@ -15,17 +15,17 @@ contributors:
     avatar_url: "https://avatars.githubusercontent.com/u/56211510?v=4"
     html_url: "https://github.com/SEKI-YUTA"
 latest_date: "2024-09-19"
-slug: oss-blog/what-is-oss-blog
+slug: tech-museum/what-is-tech-museum
 ---
 
-# 技術記事サイトのOSS Blogとは
+# 技術記事サイトのTech.museumとは
 
 ## いきなりですが、こんな経験はありませんか！？
 
 - 参考にした技術記事が古くてやり方が変わっていた🥺
 - 参考にした技術記事の内容が間違っていた😭
 
-これらの問題を解決するために、私たちはOSS(Open Source Software)の仕組みを活用してみんなが著者であり、読者である技術記事サイト`OSS Blog`を開発しました。
+これらの問題を解決するために、私たちはOSS(Open Source Software)の仕組みを活用してみんなが著者であり、読者である技術記事サイト`Tech.museum`を開発しました。
 
 ## 従来の技術記事サイトの問題
 
@@ -45,7 +45,7 @@ slug: oss-blog/what-is-oss-blog
 - 勝手に記事が削除される
   中央集権ではなく、みんなが記事を作成・編集できるOSS形式でのオープンな運営することで、勝手に記事が削除されることを防ぎます。
 
-## OSS Blogの優れている点
+## Tech.museumの優れている点
 
 - 記事の質を保ちやすい
 - 自分が書いた記事をレビューしてもらえる
@@ -64,7 +64,7 @@ slug: oss-blog/what-is-oss-blog
 
 ### 記事の作成
 
-OSS Blogでは記事の雛形を生成するコマンドラインツールが用意されているので、それを使って記事を作成します。
+Tech.museumでは記事の雛形を生成するコマンドラインツールが用意されているので、それを使って記事を作成します。
 
 #### `pnpm run gen:article`コマンドを実行する
 
@@ -84,7 +84,7 @@ pnpm run gen:article
 - git
 - infra
 - mobile
-- oss-blog
+- tech-museum
   のカテゴリがあります。
   もし、これらのカテゴリに当てはまらない場合は、一番下にある`Create new folder`を選択して新しいトップカテゴリを作成します。
   今回の例では`mobile`を選択します。
@@ -117,5 +117,5 @@ pnpm run gen:article
 
 ## まとめ
 
-OSS Blogは従来の技術記事サイトの`情報が古い`や`間違っている`といった問題を解決する事ができます。
+Tech.museumは従来の技術記事サイトの`情報が古い`や`間違っている`といった問題を解決する事ができます。
 また、OSSの仕組みで記事を投稿するのでOSSコントリビュートの練習にもなる！
