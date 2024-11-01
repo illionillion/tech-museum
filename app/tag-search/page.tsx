@@ -14,8 +14,9 @@ const Page = async ({ searchParams }: Props) => {
   if (!query) {
     return <Text>Home page or default content</Text>
   }
+  const tags = query.split(",")
 
-  const articles = (await getArticleList()).filter((article) => article.keyword.includes(query))
+  const articles = (await getArticleList()).filter((article) => article.keyword.some((word) => tags.includes(word)))
   
   return (
     <Layout>
