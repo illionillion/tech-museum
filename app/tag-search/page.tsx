@@ -17,7 +17,10 @@ const Page = async ({ searchParams }: Props) => {
   const tags = query.split(",")
 
   const articles = (await getArticleList()).filter((article) => article.keyword.some((word) => tags.includes(word)))
-  
+  if (articles.length === 0) {
+    notFound()
+  }
+
   return (
     <Layout>
       <VStack>
