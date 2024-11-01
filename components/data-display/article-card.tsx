@@ -1,4 +1,4 @@
-import { CalendarIcon, StarIcon, UserIcon } from "@yamada-ui/lucide"
+import { CalendarIcon, ThumbsUpIcon, UserIcon } from "@yamada-ui/lucide"
 import {
   Card,
   CardBody,
@@ -10,13 +10,13 @@ import {
   Tag,
   Text,
 } from "@yamada-ui/react"
-import type { ArticleMetadata } from "article"
 import Link from "next/link"
 import type { FC } from "react"
 import { Contributor } from "./contributors"
+import type { getArticleList } from "@/utils/articles"
 
 interface ArticleCardProps {
-  article: ArticleMetadata
+  article: Awaited<ReturnType<typeof getArticleList>>[number]
 }
 
 export const ArticleCard: FC<ArticleCardProps> = ({ article }) => {
@@ -50,9 +50,9 @@ export const ArticleCard: FC<ArticleCardProps> = ({ article }) => {
             <CalendarIcon />
             <Text>{article.latest_date}</Text>
           </HStack>
-          <HStack>
-            <StarIcon />
-            <Text>10</Text>
+          <HStack gap="sm">
+            <ThumbsUpIcon />
+            <Text>{article.likeCount}</Text>
           </HStack>
         </HStack>
       </CardBody>

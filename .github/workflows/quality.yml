@@ -100,8 +100,8 @@ jobs:
           node --version
           pnpm install
 
-      - name: Set up DATABASE_URL
-        run: echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" >> $GITHUB_ENV
+      - name: Generate Prisma Type
+        run: pnpm generate
 
       - name: Run typecheck
         run: pnpm typecheck
@@ -109,6 +109,8 @@ jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
+    env:
+      DATABASE_URL: ${{secrets.DATABASE_URL}}
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -129,8 +131,10 @@ jobs:
           node --version
           pnpm install
 
-      - name: Set up DATABASE_URL
-        run: echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" >> $GITHUB_ENV
+      - name: Prisma migration
+        run: |
+          pnpm migrate
+          pnpm generate
 
       - name: Run Build
         run: pnpm run build

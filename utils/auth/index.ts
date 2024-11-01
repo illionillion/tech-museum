@@ -10,6 +10,9 @@ const config: NextAuthConfig = {
     }),
   ],
   basePath: "/api/auth",
+  session: {
+    strategy: "jwt",
+  },
   callbacks: {
     authorized: async ({ request }) => {
       try {
@@ -21,9 +24,17 @@ const config: NextAuthConfig = {
         return false
       }
     },
-    jwt({ token, trigger, session }) {
-      if (trigger === "update") token.name = session.user.name
+    async jwt({ token, user }) {
+      if (user) {
+        token.id = user.id
+      }
       return token
+    },
+    async session({ session, token }) {
+      if (token?.id && typeof token.id === "string") {
+        session.user.id = token.id as string
+      }
+      return session
     },
   },
 }

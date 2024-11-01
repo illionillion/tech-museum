@@ -8,9 +8,13 @@ import type { getArticleList } from "@/utils/articles"
 
 interface ProfileTabsProps {
   articles: Awaited<ReturnType<typeof getArticleList>>
+  likedArticles: Awaited<ReturnType<typeof getArticleList>>
 }
 
-export const ProfileTabs: FC<ProfileTabsProps> = ({ articles }) => {
+export const ProfileTabs: FC<ProfileTabsProps> = ({
+  articles,
+  likedArticles,
+}) => {
   return (
     <Tabs>
       <Tab>コントリビュート</Tab>
@@ -19,15 +23,27 @@ export const ProfileTabs: FC<ProfileTabsProps> = ({ articles }) => {
 
       <TabPanel>
         <VStack>
-          {articles.map((article) => (
-            <ArticleCard key={article.slug} article={article} />
-          ))}
+          {articles.length ? (
+            articles.map((article) => (
+              <ArticleCard key={article.slug} article={article} />
+            ))
+          ) : (
+            <Center>
+              <Text>記事はありません</Text>
+            </Center>
+          )}
         </VStack>
       </TabPanel>
       <TabPanel>
-        <Center>
-          <Text>いいねした記事はありません</Text>
-        </Center>
+        {likedArticles.length ? (
+          likedArticles.map((article) => (
+            <ArticleCard key={article.slug} article={article} />
+          ))
+        ) : (
+          <Center>
+            <Text>いいねした記事はありません</Text>
+          </Center>
+        )}
       </TabPanel>
       <TabPanel>
         <Center>

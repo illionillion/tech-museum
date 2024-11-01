@@ -9,15 +9,17 @@ import { TableOfContents } from "../navigation/table-of-contents"
 export interface ArticleLayoutProps {
   metadata: ArticleMetadata | undefined
   content: string
+  likeCount: number
 }
 
 export const ArticleLayout: FC<ArticleLayoutProps> = ({
   content,
   metadata,
+  likeCount,
 }) => {
   return (
     <HStack maxW="9xl" w="full" alignItems="start" m="auto">
-      <ArticleButtons metadata={metadata} />
+      <ArticleButtons metadata={metadata} likeCount={likeCount} />
       <VStack gap="md" flexGrow={1}>
         <VStack>
           <Heading>{metadata?.title}</Heading>
