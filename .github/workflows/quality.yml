@@ -109,6 +109,8 @@ jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
+    env:
+      DATABASE_URL: ${{secrets.DATABASE_URL}}
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
