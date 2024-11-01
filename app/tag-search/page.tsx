@@ -1,4 +1,6 @@
 import { Text, VStack } from "@yamada-ui/react"
+import type { Metadata } from "next"
+import { notFound } from "next/navigation"
 import React from "react"
 import { ArticleCard } from "@/components/data-display/article-card"
 import { Layout } from "@/components/layouts"
@@ -6,6 +8,12 @@ import { getArticleList } from "@/utils/articles"
 
 interface Props {
   searchParams: { query?: string }
+}
+
+export const generateMetadata = ({ searchParams }: Props): Metadata => {
+  return {
+    title: `タグ検索: ${searchParams.query}`,
+  }
 }
 
 const Page = async ({ searchParams }: Props) => {
