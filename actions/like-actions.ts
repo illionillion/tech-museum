@@ -9,9 +9,6 @@ import {
   getArticlesByUsername,
 } from "@/prisma/repositories/like-repository"
 
-// キャッシュされないように設定
-export const revalidate = 0
-
 export const toggleLike = async (username: string, articleURL: string) => {
   const liked = await isLiked(username, articleURL)
 
