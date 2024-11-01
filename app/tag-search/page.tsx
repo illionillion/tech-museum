@@ -1,4 +1,4 @@
-import { Center, Text, VStack } from "@yamada-ui/react"
+import { Center, Heading, Text, VStack } from "@yamada-ui/react"
 import type { Metadata } from "next"
 import React from "react"
 import { ArticleCard } from "@/components/data-display/article-card"
@@ -28,6 +28,7 @@ const Page = async ({ searchParams }: Props) => {
       {articles.length > 0
         ? (
           <VStack>
+            <Heading>タグ検索: {tags.join(", ")}</Heading>
             {articles.map((article) => (
               <ArticleCard key={article.slug} article={article} />
             ))}
