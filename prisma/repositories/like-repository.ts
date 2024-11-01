@@ -35,3 +35,12 @@ export const getLikeCount = async (articleURL: string) => {
     where: { articleURL, removedAt: null },
   })
 }
+
+export const getArticlesByUsername = async (username: string) => {
+  return await db.like.findMany({
+    where: {
+      username: username,
+      removedAt: null,
+    },
+  })
+}

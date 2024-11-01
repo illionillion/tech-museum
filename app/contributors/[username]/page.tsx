@@ -14,6 +14,7 @@ import {
   VStack,
 } from "@yamada-ui/react"
 import { getArticleList } from "../../../utils/articles"
+import { fetchArticlesByUsername } from "@/actions/like-actions"
 import { ProfileTabs } from "@/components/disclosure/profile-tabs"
 import { Layout } from "@/components/layouts"
 import { getContributors } from "@/utils/next"
@@ -59,6 +60,21 @@ const Page = async ({ params }: Props) => {
   const userArticles = articles.filter((article) =>
     article.contributors?.some((contributor) => contributor.login === username),
   )
+  // 例として、likedArticlesを取得する処理
+  const fetchedArticles = await fetchArticlesByUsername(username || "")
+
+  const likedArticles = (
+    await Promise.all(
+      articles.map(async (article) => {
+        const isLiked = fetchedArticles.some(
+          (item) => item.articleURL === article.slug,
+        )
+        return isLiked ? article : null // 一致した場合は記事を返し、一致しない場合はnull
+      }),
+    )
+  )
+    // nullを除外して最終的なlikedArticlesを得る
+    .filter((article) => article !== null)
 
   return (
     <Layout>
@@ -117,7 +133,7 @@ const Page = async ({ params }: Props) => {
             </HStack>
           </CardBody>
         </Card>
-        <ProfileTabs articles={userArticles} />
+        <ProfileTabs articles={userArticles} likedArticles={likedArticles} />
       </Container>
     </Layout>
   )
