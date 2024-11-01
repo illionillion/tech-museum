@@ -6,7 +6,7 @@ import { Layout } from "@/components/layouts"
 import { getArticleList } from "@/utils/articles"
 
 interface Props {
-  searchParams: { query?: string }
+  searchParams: { query?: string[] | string }
 }
 
 export const generateMetadata = ({ searchParams }: Props): Metadata => {
@@ -17,11 +17,9 @@ export const generateMetadata = ({ searchParams }: Props): Metadata => {
 
 const Page = async ({ searchParams }: Props) => {
   const { query } = searchParams
+  const queryArray = Array.isArray(query) ? query : [query]
 
-  if (!query) {
-    return <Text>Home page or default content</Text>
-  }
-  const tags = query.split(",")
+  const tags = queryArray.filter(i => i).flatMap(i => (i as string).split(","))
 
   const articles = (await getArticleList()).filter((article) => article.keyword.some((word) => tags.includes(word)))
 
