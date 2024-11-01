@@ -103,6 +103,9 @@ jobs:
       - name: Set up DATABASE_URL
         run: echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" >> $GITHUB_ENV
 
+      - name: Generate Prisma Type
+        run: pnpm generate
+
       - name: Run typecheck
         run: pnpm typecheck
 
@@ -131,6 +134,9 @@ jobs:
 
       - name: Set up DATABASE_URL
         run: echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" >> $GITHUB_ENV
+
+      - name: Generate Prisma Type
+        run: pnpm generate
 
       - name: Run Build
         run: pnpm run build
