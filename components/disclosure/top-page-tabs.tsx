@@ -56,7 +56,7 @@ export const TopPageTabs: FC<TopPageTabsProps> = ({ articles }) => {
         </VStack>
       </TabPanel>
       <TabPanel>
-        {likedArticles?.length ? (
+        {likedArticles && likedArticles.length ? (
           likedArticles?.map((article) => (
             <ArticleCard key={article.slug} article={article} />
           ))
