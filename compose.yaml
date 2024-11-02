@@ -1,5 +1,6 @@
 services:
   db:
+    container_name: db
     image: postgres:13
     ports:
       - 54320:5432
