@@ -133,7 +133,7 @@ jobs:
 
       - name: Prisma migration
         run: |
-          pnpm migrate
+          pnpm migrate:deploy
           pnpm generate
 
       - name: Run Build

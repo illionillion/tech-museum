@@ -18,6 +18,7 @@
     "gen:search": "tsx scripts/search",
     "gen:insights": "tsx scripts/report-insights.ts",
     "migrate": "prisma migrate dev --name init",
+    "migrate:deploy": "prisma migrate deploy",
     "generate": "prisma generate",
     "studio": "prisma studio"
   },
