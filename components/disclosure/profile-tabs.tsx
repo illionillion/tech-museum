@@ -14,22 +14,11 @@ import React from "react"
 import { ArticleCard } from "../data-display/article-card"
 import { fetchBookmarksByUsername } from "@/actions/bookmark-actions"
 import { fetchArticlesByUsername } from "@/actions/like-actions"
-import type { getArticleList } from "@/utils/articles"
+import { joinArticles, type getArticleList } from "@/utils/articles"
 
 interface ProfileTabsProps {
   username: string
   articles: Awaited<ReturnType<typeof getArticleList>>
-}
-
-function joinArticles(fetchedArticles: Awaited<ReturnType<typeof fetchArticlesByUsername>>, articles: Awaited<ReturnType<typeof getArticleList>>) {
-  return articles.map((article) => {
-    const isLiked = fetchedArticles.some(
-      (item) => item.articleURL === article.slug,
-    )
-    return isLiked ? article : null // 一致した場合は記事を返し、一致しない場合はnull
-  })
-    // nullを除外して最終的なlikedArticlesを得る
-    .filter((article) => article !== null)
 }
 
 export const ProfileTabs: FC<ProfileTabsProps> = ({ username, articles }) => {
