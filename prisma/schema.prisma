@@ -13,94 +13,98 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Article {
-  id                Int                @id @default(autoincrement())
-  url               String             @unique
-  createdAt         DateTime           @default(now()) @map(name: "created_at")
-  updatedAt         DateTime           @updatedAt @map(name: "updated_at")
-  likes             Like[]
-  bookmarks         Bookmark[]
-  difficultyRatings DifficultyRating[]
-  technicalRatings  TechnicalRating[]
-}
-
-model Follow {
-  id                Int                @id @default(autoincrement())
-  fromUserId        String              @map(name: "from_user_id")
-  toUserId          String                @map(name: "to_user_id")
-  createdAt         DateTime           @default(now()) @map(name: "created_at")
-  updatedAt         DateTime           @updatedAt @map(name: "updated_at")
+generator erd {
+    provider = "prisma-erd-generator"
+    output   = "./ERD.md"
 }
 
 model Like {
-  id                Int                @id @default(autoincrement())
-  userId            String             @map(name: "user_id")
-  article           Article            @relation(fields: [articleId], references: [id])
-  articleId         Int                @map(name: "article_id")
-  createdAt         DateTime           @default(now()) @map(name: "created_at")
-  updatedAt         DateTime           @updatedAt @map(name: "updated_at")
+  id                Int       @id @default(autoincrement())
+  username          String    @map(name: "username") // GitHubのusernameを保存
+  articleURL        String    @map(name: "article_url") // URLで記事を一意に識別
+  createdAt         DateTime  @default(now()) @map(name: "created_at")
+  removedAt         DateTime? @map(name: "removed_at") // 削除されたいいねの管理 (論理削除)
 }
 
-model Bookmark {
-  id                Int                @id @default(autoincrement())
-  userId            String                @map(name: "user_id")
-  article           Article            @relation(fields: [articleId], references: [id])
-  articleId         Int                @map(name: "article_id")
-  createdAt         DateTime           @default(now()) @map(name: "created_at")
-  updatedAt         DateTime           @updatedAt @map(name: "updated_at")
-}
+// model Article {
+//   id                Int                @id @default(autoincrement())
+//   url               String             @unique
+//   createdAt         DateTime           @default(now()) @map(name: "created_at")
+//   updatedAt         DateTime           @updatedAt @map(name: "updated_at")
+//   likes             Like[]
+//   bookmarks         Bookmark[]
+//   difficultyRatings DifficultyRating[]
+//   technicalRatings  TechnicalRating[]
+// }
 
-model DifficultyRating {
-  id                Int                @id @default(autoincrement())
-  userId            String               @map(name: "user_id")
-  article           Article            @relation(fields: [articleId], references: [id])
-  articleId         Int                @map(name: "article_id")
-  rating            Int
-  createdAt         DateTime           @default(now()) @map(name: "created_at")
-  updatedAt         DateTime           @updatedAt @map(name: "updated_at")
-}
+// model Follow {
+//   id                Int                @id @default(autoincrement())
+//   fromUserId        String              @map(name: "from_user_id")
+//   toUserId          String                @map(name: "to_user_id")
+//   createdAt         DateTime           @default(now()) @map(name: "created_at")
+//   updatedAt         DateTime           @updatedAt @map(name: "updated_at")
+// }
 
-model TechnicalRating {
-  id                Int                @id @default(autoincrement())
-  userId            String               @map(name: "user_id")
-  article           Article            @relation(fields: [articleId], references: [id])
-  articleId         Int                @map(name: "article_id")
-  rating            Int
-  createdAt         DateTime           @default(now()) @map(name: "created_at")
-  updatedAt         DateTime           @updatedAt @map(name: "updated_at")
-}
+// model Bookmark {
+//   id                Int                @id @default(autoincrement())
+//   userId            String                @map(name: "user_id")
+//   article           Article            @relation(fields: [articleId], references: [id])
+//   articleId         Int                @map(name: "article_id")
+//   createdAt         DateTime           @default(now()) @map(name: "created_at")
+//   updatedAt         DateTime           @updatedAt @map(name: "updated_at")
+// }
 
-model Tag {
-  id                Int                @id @default(autoincrement())
-  name              String             @unique
-  iconUrl           String             @map(name: "icon_url")
-  createdAt         DateTime           @default(now()) @map(name: "created_at")
-  updatedAt         DateTime           @updatedAt @map(name: "updated_at")
-  relationUserTags  RelationUserTag[]
-}
+// model DifficultyRating {
+//   id                Int                @id @default(autoincrement())
+//   userId            String               @map(name: "user_id")
+//   article           Article            @relation(fields: [articleId], references: [id])
+//   articleId         Int                @map(name: "article_id")
+//   rating            Int
+//   createdAt         DateTime           @default(now()) @map(name: "created_at")
+//   updatedAt         DateTime           @updatedAt @map(name: "updated_at")
+// }
 
-model RelationUserTag {
-  id                Int                @id @default(autoincrement())
-  userId            String             @map(name: "user_id")
-  tag               Tag                @relation(fields: [tagId], references: [id])
-  tagId             Int                @map(name: "tag_id")
-  createdAt         DateTime           @default(now()) @map(name: "created_at")
-  updatedAt         DateTime           @updatedAt @map(name: "updated_at")
-}
+// model TechnicalRating {
+//   id                Int                @id @default(autoincrement())
+//   userId            String               @map(name: "user_id")
+//   article           Article            @relation(fields: [articleId], references: [id])
+//   articleId         Int                @map(name: "article_id")
+//   rating            Int
+//   createdAt         DateTime           @default(now()) @map(name: "created_at")
+//   updatedAt         DateTime           @updatedAt @map(name: "updated_at")
+// }
 
-model Role {
-  id                Int                @id @default(autoincrement())
-  name              String
-  iconUrl           String             @map(name: "icon_url")
-  createdAt         DateTime           @default(now()) @map(name: "created_at")
-  updatedAt         DateTime           @updatedAt @map(name: "updated_at")
-}
+// model Tag {
+//   id                Int                @id @default(autoincrement())
+//   name              String             @unique
+//   iconUrl           String             @map(name: "icon_url")
+//   createdAt         DateTime           @default(now()) @map(name: "created_at")
+//   updatedAt         DateTime           @updatedAt @map(name: "updated_at")
+//   relationUserTags  RelationUserTag[]
+// }
 
-model Notice {
-  id                Int                @id @default(autoincrement())
-  userId            String             @map(name: "user_id")
-  message           String
-  readFlag          Boolean            @map(name: "read_flag")
-  createdAt         DateTime           @default(now()) @map(name: "created_at")
-  updatedAt         DateTime           @updatedAt @map(name: "updated_at")
-}
+// model RelationUserTag {
+//   id                Int                @id @default(autoincrement())
+//   userId            String             @map(name: "user_id")
+//   tag               Tag                @relation(fields: [tagId], references: [id])
+//   tagId             Int                @map(name: "tag_id")
+//   createdAt         DateTime           @default(now()) @map(name: "created_at")
+//   updatedAt         DateTime           @updatedAt @map(name: "updated_at")
+// }
+
+// model Role {
+//   id                Int                @id @default(autoincrement())
+//   name              String
+//   iconUrl           String             @map(name: "icon_url")
+//   createdAt         DateTime           @default(now()) @map(name: "created_at")
+//   updatedAt         DateTime           @updatedAt @map(name: "updated_at")
+// }
+
+// model Notice {
+//   id                Int                @id @default(autoincrement())
+//   userId            String             @map(name: "user_id")
+//   message           String
+//   readFlag          Boolean            @map(name: "read_flag")
+//   createdAt         DateTime           @default(now()) @map(name: "created_at")
+//   updatedAt         DateTime           @updatedAt @map(name: "updated_at")
+// }
