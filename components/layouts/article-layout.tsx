@@ -10,16 +10,18 @@ export interface ArticleLayoutProps {
   metadata: ArticleMetadata | undefined
   content: string
   likeCount: number
+  bookmarkCount: number
 }
 
 export const ArticleLayout: FC<ArticleLayoutProps> = ({
   content,
   metadata,
   likeCount,
+  bookmarkCount
 }) => {
   return (
     <HStack maxW="9xl" w="full" alignItems="start" m="auto">
-      <ArticleButtons metadata={metadata} likeCount={likeCount} />
+      <ArticleButtons metadata={metadata} likeCount={likeCount} bookmarkCount={bookmarkCount} />
       <VStack gap="md" flexGrow={1}>
         <VStack>
           <Heading>{metadata?.title}</Heading>
