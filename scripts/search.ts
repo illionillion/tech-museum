@@ -12,6 +12,7 @@ type Content = {
   type: "page" | "fragment"
   description?: string
   slug: string
+  keyword?: string[]
   hierarchy: {
     lv1: string
     lv2?: string
@@ -54,7 +55,7 @@ const generateSearchContent: p.RequiredRunner =
           if (!Object.keys(data).length) return []
 
           let { title } = data
-          const { description } = data
+          const { description, keyword } = data
 
           const slug = `/${getSlug(path)}`
 
@@ -67,6 +68,7 @@ const generateSearchContent: p.RequiredRunner =
               description,
               slug,
               hierarchy: { lv1: title },
+              keyword,
             },
           ]
 
@@ -82,6 +84,7 @@ const generateSearchContent: p.RequiredRunner =
               title: item.content,
               type: "fragment",
               slug: slug + fragment,
+              keyword,
               hierarchy: { lv1: title },
             }
 
