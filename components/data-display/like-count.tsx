@@ -1,3 +1,4 @@
+"use client"
 import { ThumbsUpIcon } from "@yamada-ui/lucide"
 import { HStack, Text, useSafeLayoutEffect } from "@yamada-ui/react"
 import type { FC } from "react"
