@@ -34,7 +34,7 @@ import Link from "next/link"
 import type { FC } from "react"
 import { useRef, useState, memo } from "react"
 import { Search, SearchButton } from "../forms/search"
-import { UserMenu } from "../navigation/UserMenu"
+import { UserMenu } from "../navigation/user-manu"
 
 export type HeaderProps = CenterProps
 
