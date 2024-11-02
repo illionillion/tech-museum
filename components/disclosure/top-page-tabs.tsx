@@ -1,8 +1,6 @@
 "use client"
 import {
-  Button,
   Center,
-  Loading,
   Tab,
   TabPanel,
   Tabs,
@@ -10,7 +8,7 @@ import {
   useAsync,
   VStack,
 } from "@yamada-ui/react"
-import { useSession, signIn } from "next-auth/react"
+import { useSession } from "next-auth/react"
 import type { FC } from "react"
 import React from "react"
 import { ArticleCard } from "../data-display/article-card"
@@ -21,7 +19,7 @@ interface TopPageTabsProps {
   articles: Awaited<ReturnType<typeof getArticleList>>
 }
 export const TopPageTabs: FC<TopPageTabsProps> = ({ articles }) => {
-  const { data: session, status } = useSession()
+  const { data: session } = useSession()
   const { value: likedArticles } = useAsync(async () => {
     // 例として、likedArticlesを取得する処理
     const fetchedArticles = await fetchArticlesByUsername(
@@ -49,7 +47,6 @@ export const TopPageTabs: FC<TopPageTabsProps> = ({ articles }) => {
       <Tab>いいね</Tab>
       <Tab>ブックマーク</Tab>
       <Tab>フォロー中</Tab>
-      <Tab>AI厳選</Tab>
 
       <TabPanel>
         <VStack>
@@ -78,23 +75,6 @@ export const TopPageTabs: FC<TopPageTabsProps> = ({ articles }) => {
         <Center>
           <Text>フォロー中のユーザーの記事はありません</Text>
         </Center>
-      </TabPanel>
-      <TabPanel>
-        {status === "loading" ? (
-          <Center w="full" h="full">
-            <Loading />
-          </Center>
-        ) : session ? (
-          <VStack>
-            {articles.map((article) => (
-              <ArticleCard key={article.slug} article={article} />
-            ))}
-          </VStack>
-        ) : (
-          <Center w="full" h="full">
-            <Button onClick={() => signIn()}>ログインしてください</Button>
-          </Center>
-        )}
       </TabPanel>
     </Tabs>
   )
