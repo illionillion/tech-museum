@@ -2,6 +2,7 @@ import path from "path"
 import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 import { getArticleContent, getArticlePaths } from "./articles"
+import { fetchLikeCount } from "@/actions/like-actions"
 import contributorData from "@/i18n/contributors.json"
 
 interface Props {
@@ -49,9 +50,14 @@ export const getStaticArticleContent =
       notFound()
     }
 
+    const likeCount = await fetchLikeCount(
+      path.join(categoryGroupName, ...(slug || [])),
+    )
+
     return {
       content: content || "No content found",
       metadata: metadata,
+      likeCount,
     }
   }
 

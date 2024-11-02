@@ -2,6 +2,7 @@ import { readFile } from "fs/promises"
 import type { ArticleMetadata } from "article"
 import { glob } from "glob"
 import matter from "gray-matter"
+import { fetchLikeCount } from "@/actions/like-actions"
 
 export const getArticlePaths = async (dir: string) => {
   const articlePaths = (await glob(`contents/${dir}/**/*.md`)).map((filePath) =>
@@ -23,15 +24,19 @@ export const getArticleList = async () => {
       const { metadata } = await getArticleContent(
         articlePath.replace(".md", ""),
       )
+      const likeCount = await fetchLikeCount(
+        articlePath.replace("contents/", "").replace(".md", ""),
+      )
+
       const slug = articlePath
         .replace(/\\/g, "/")
         .replace(/^contents\//, "")
         .replace(".md", "")
-      return { ...metadata, slug }
+      return { ...metadata, slug, likeCount }
     }),
   )
 
-  return articleList as ArticleMetadata[]
+  return articleList
 }
 
 export const getArticleContent = async (

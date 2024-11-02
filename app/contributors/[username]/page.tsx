@@ -117,7 +117,7 @@ const Page = async ({ params }: Props) => {
             </HStack>
           </CardBody>
         </Card>
-        <ProfileTabs articles={userArticles} />
+        <ProfileTabs articles={userArticles} username={username || ""} />
       </Container>
     </Layout>
   )

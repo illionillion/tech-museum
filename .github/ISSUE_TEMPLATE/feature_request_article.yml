@@ -23,7 +23,5 @@ body:
       placeholder: "例: #123"
 
   - type: markdown
-    id: additional_context
     attributes:
-      label: "追加情報"
-      placeholder: "追加情報があれば書いてください。"
+      value: "追加情報があれば書いてください。"

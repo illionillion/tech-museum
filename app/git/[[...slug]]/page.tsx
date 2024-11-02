@@ -25,11 +25,12 @@ const Page = async ({ params }: Props) => {
     return <Text>Home page or default content</Text>
   }
 
-  const { content, metadata } = await getStaticArticleContent("git")(slug)
+  const { content, metadata, likeCount } =
+    await getStaticArticleContent("git")(slug)
 
   return (
     <Layout>
-      <ArticleLayout {...{ content, metadata }} />
+      <ArticleLayout {...{ content, metadata, likeCount }} />
     </Layout>
   )
 }
