@@ -1,4 +1,4 @@
-import { CalendarIcon, ThumbsUpIcon, UserIcon } from "@yamada-ui/lucide"
+import { CalendarIcon, UserIcon } from "@yamada-ui/lucide"
 import {
   Card,
   CardBody,
@@ -13,6 +13,7 @@ import {
 import Link from "next/link"
 import type { FC } from "react"
 import { Contributor } from "./contributors"
+import { LikeCount } from "./like-count"
 import type { getArticleList } from "@/utils/articles"
 
 interface ArticleCardProps {
@@ -50,10 +51,7 @@ export const ArticleCard: FC<ArticleCardProps> = ({ article }) => {
             <CalendarIcon />
             <Text>{article.latest_date}</Text>
           </HStack>
-          <HStack gap="sm">
-            <ThumbsUpIcon />
-            <Text>{article.likeCount}</Text>
-          </HStack>
+          <LikeCount article={article} />
         </HStack>
       </CardBody>
     </Card>
