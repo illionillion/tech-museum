@@ -164,7 +164,6 @@ const SearchModal: FC<SearchModalProps> = memo(
           "hierarchy.lv4",
           "description",
           "title",
-          "keyword",
         ],
       }).slice(0, 20)
     }, [query, contents])
