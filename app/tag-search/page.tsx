@@ -21,7 +21,7 @@ const Page = async ({ searchParams }: Props) => {
 
   const tags = queryArray
     .filter((i) => i)
-    .flatMap((i) => (i as string).split(","))
+    .flatMap((i) => (i as string).split(",")).map((i) => i.trim())
 
   const articles = (await getArticleList()).filter((article) =>
     article?.keyword?.some((word) => tags.includes(word)),
