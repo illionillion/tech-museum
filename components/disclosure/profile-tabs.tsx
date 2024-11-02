@@ -14,7 +14,8 @@ import React from "react"
 import { ArticleCard } from "../data-display/article-card"
 import { fetchBookmarksByUsername } from "@/actions/bookmark-actions"
 import { fetchArticlesByUsername } from "@/actions/like-actions"
-import { joinArticles, type getArticleList } from "@/utils/articles"
+import type { getArticleList } from "@/utils/articles"
+import { joinArticles } from "@/utils/join-articles"
 
 interface ProfileTabsProps {
   username: string
