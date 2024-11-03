@@ -14,6 +14,7 @@ import type { FC } from "react"
 import React from "react"
 import { ArticleCard } from "../data-display/article-card"
 import { fetchBookmarksByUsername } from "@/actions/bookmark-actions"
+import { fetchFollowingList } from "@/actions/follow-actions"
 import { fetchArticlesByUsername } from "@/actions/like-actions"
 import type { getArticleList } from "@/utils/articles"
 import { joinArticles } from "@/utils/join-articles"
@@ -24,7 +25,6 @@ interface TopPageTabsProps {
 }
 
 export const TopPageTabs: FC<TopPageTabsProps> = ({ articles, tabKey }) => {
-
   const { data: session } = useSession()
   const { value: likedArticles } = useAsync(async () => {
     // 例として、likedArticlesを取得する処理
@@ -42,17 +42,45 @@ export const TopPageTabs: FC<TopPageTabsProps> = ({ articles, tabKey }) => {
 
     return joinArticles(fetchedArticles, articles)
   })
-  const tabIndex = tabKey === "likes" ? 1
-    : tabKey === "bookmarks" ? 2
-    : tabKey === "followings" ? 3
-      : 0
+  const { value: follows } = useAsync(async () => {
+    if (!session?.user?.name) {
+      return [] // セッションがない場合は、全ての記事を返す
+    }
+
+    const fetchFollows = await fetchFollowingList(session.user.name)
+    const followedUsernames = fetchFollows.map((follow) => follow.toUsername)
+
+    // フォローしているユーザーの投稿をフィルタリング
+    return articles.filter((article) =>
+      article.contributors?.some((contributor) =>
+        followedUsernames.includes(contributor.login),
+      ),
+    )
+  }, [articles, session?.user?.name]) // 依存配列に必要な値を追加
+
+  const tabIndex =
+    tabKey === "likes"
+      ? 1
+      : tabKey === "bookmarks"
+        ? 2
+        : tabKey === "followings"
+          ? 3
+          : 0
 
   return (
     <Tabs index={tabIndex}>
-      <Tab as={Link} href="/?tab_key=list">一覧</Tab>
-      <Tab as={Link} href="/?tab_key=likes">いいね</Tab>
-      <Tab as={Link} href="/?tab_key=bookmarks">ブックマーク</Tab>
-      <Tab as={Link} href="/?tab_key=followings">フォロー中</Tab>
+      <Tab as={Link} href="/?tab_key=list">
+        一覧
+      </Tab>
+      <Tab as={Link} href="/?tab_key=likes">
+        いいね
+      </Tab>
+      <Tab as={Link} href="/?tab_key=bookmarks">
+        ブックマーク
+      </Tab>
+      <Tab as={Link} href="/?tab_key=followings">
+        フォロー中
+      </Tab>
 
       <TabPanel>
         <VStack>
@@ -84,9 +112,15 @@ export const TopPageTabs: FC<TopPageTabsProps> = ({ articles, tabKey }) => {
         )}
       </TabPanel>
       <TabPanel>
-        <Center>
-          <Text>フォロー中のユーザーの記事はありません</Text>
-        </Center>
+        {follows && follows.length ? (
+          follows?.map((article) => (
+            <ArticleCard key={article.slug} article={article} />
+          ))
+        ) : (
+          <Center>
+            <Text>フォロー中のユーザーの記事はありません</Text>
+          </Center>
+        )}
       </TabPanel>
     </Tabs>
   )
