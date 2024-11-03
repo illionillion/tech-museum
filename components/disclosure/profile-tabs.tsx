@@ -20,11 +20,17 @@ import { joinArticles } from "@/utils/join-articles"
 
 interface ProfileTabsProps {
   articles: Awaited<ReturnType<typeof getArticleList>>
+  userArticles: Awaited<ReturnType<typeof getArticleList>>
   tabKey?: "contributions" | "likes" | "bookmarks" | string
   username?: string
 }
 
-export const ProfileTabs: FC<ProfileTabsProps> = ({ articles, tabKey, username }) => {
+export const ProfileTabs: FC<ProfileTabsProps> = ({
+  articles,
+  userArticles,
+  tabKey,
+  username,
+}) => {
   // デフォルトでは contributions タブを表示
   const tabIndex = tabKey === "likes" ? 1 : tabKey === "bookmarks" ? 2 : 0
 
@@ -40,13 +46,19 @@ export const ProfileTabs: FC<ProfileTabsProps> = ({ articles, tabKey, username }
 
   return (
     <Tabs index={tabIndex}>
-      <Tab as={Link} href={`/contributors/${username}?tab_key=contributions`}>コントリビュート</Tab>
-      <Tab as={Link} href={`/contributors/${username}?tab_key=likes`}>いいね</Tab>
-      <Tab as={Link} href={`/contributors/${username}?tab_key=bookmarks`}>ブックマーク</Tab>
+      <Tab as={Link} href={`/contributors/${username}?tab_key=contributions`}>
+        コントリビュート
+      </Tab>
+      <Tab as={Link} href={`/contributors/${username}?tab_key=likes`}>
+        いいね
+      </Tab>
+      <Tab as={Link} href={`/contributors/${username}?tab_key=bookmarks`}>
+        ブックマーク
+      </Tab>
 
       <TabPanel>
         <VStack>
-          {articles.length ? (
+          {userArticles.length ? (
             articles.map((article) => (
               <ArticleCard key={article.slug} article={article} />
             ))
