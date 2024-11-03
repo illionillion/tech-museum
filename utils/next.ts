@@ -2,6 +2,7 @@ import path from "path"
 import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 import { getArticleContent, getArticlePaths } from "./articles"
+import { fetchBookmarkCount } from "@/actions/bookmark-actions"
 import { fetchLikeCount } from "@/actions/like-actions"
 import contributorData from "@/i18n/contributors.json"
 
@@ -53,11 +54,15 @@ export const getStaticArticleContent =
     const likeCount = await fetchLikeCount(
       path.join(categoryGroupName, ...(slug || [])),
     )
+    const bookmarkCount = await fetchBookmarkCount(
+      path.join(categoryGroupName, ...(slug || [])),
+    )
 
     return {
       content: content || "No content found",
       metadata: metadata,
       likeCount,
+      bookmarkCount
     }
   }
 

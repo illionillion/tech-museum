@@ -179,7 +179,7 @@ const SearchModal: FC<SearchModalProps> = memo(
           (ev: KeyboardEvent<HTMLInputElement>) => void | undefined
         > = {
           ArrowDown: () => {
-            if (selectedIndex + 1 === hits.length) return
+            if (selectedIndex === hits.length) return
 
             directionRef.current = "down"
             setSelectedIndex(selectedIndex + 1)
@@ -191,10 +191,14 @@ const SearchModal: FC<SearchModalProps> = memo(
             setSelectedIndex(selectedIndex - 1)
           },
           Enter: () => {
-            if (!hits.length) return
+            if (!query) return
 
             onClose?.()
-            router.push(hits[selectedIndex].slug)
+            if (selectedIndex === 0) {
+              router.push(`/tag-search?query=${encodeURIComponent(query)}`)
+            } else {
+              router.push(hits[selectedIndex].slug)
+            }
           },
           Home: () => {
             directionRef.current = "up"
@@ -202,7 +206,7 @@ const SearchModal: FC<SearchModalProps> = memo(
           },
           End: () => {
             directionRef.current = "down"
-            setSelectedIndex(hits.length - 1)
+            setSelectedIndex(hits.length)
           },
         }
 
@@ -215,7 +219,7 @@ const SearchModal: FC<SearchModalProps> = memo(
 
         action(ev)
       },
-      [hits, onClose, selectedIndex, router],
+      [hits, onClose, selectedIndex, router, query],
     )
 
     useEffect(() => {
@@ -293,83 +297,127 @@ const SearchModal: FC<SearchModalProps> = memo(
           </HStack>
         </ModalHeader>
 
-        {hits.length ? (
+        {query && (
           <ModalBody ref={containerRef} my="0" pb="md">
             <Divider />
 
             <VStack as="ul" gap="sm">
-              {hits.map(({ title, type, slug, hierarchy }, index) => {
-                const isSelected = index === selectedIndex
-                const ref = createRef<HTMLAnchorElement>()
+              <HStack
+                as={NextLink}
+                href={`/tag-search?query=${encodeURIComponent(query)}`}
+                gap="2"
+                borderWidth="1px"
+                rounded="md"
+                minH="16"
+                py="sm"
+                px="md"
+                bg={["blackAlpha.50", "whiteAlpha.50"]}
+                data-selected={dataAttr(selectedIndex === 0)}
+                transitionProperty="colors"
+                transitionDuration="normal"
+                _focus={{ outline: "none" }}
+                _focusVisible={{ boxShadow: "outline" }}
+                _hover={{ boxShadow: "outline" }}
+                _selected={{ boxShadow: "outline" }}
+                _active={{}}
+                onClick={onClose}
+                onMouseEnter={() => {
+                  eventRef.current = "mouse"
+                  setSelectedIndex(0)
+                }}
+              >
+                <SearchIcon
+                  fontSize="2xl"
+                  color={["blackAlpha.700", "whiteAlpha.600"]}
+                />
 
-                itemRefs.current.set(index, ref)
-
-                return (
-                  <HStack
-                    as={NextLink}
-                    ref={ref}
-                    key={slug}
-                    href={slug}
-                    gap="2"
-                    borderWidth="1px"
-                    rounded="md"
-                    minH="16"
-                    py="sm"
-                    px="md"
-                    data-selected={dataAttr(isSelected)}
-                    bg={["blackAlpha.50", "whiteAlpha.50"]}
-                    transitionProperty="colors"
-                    transitionDuration="normal"
-                    _focus={{ outline: "none" }}
-                    _focusVisible={{ boxShadow: "outline" }}
-                    _hover={{ boxShadow: "outline" }}
-                    _selected={{ boxShadow: "outline" }}
-                    _active={{}}
-                    onClick={onClose}
-                    onMouseEnter={() => {
-                      eventRef.current = "mouse"
-                      setSelectedIndex(index)
-                    }}
+                <VStack gap="0">
+                  <Highlight
+                    query={query}
+                    markProps={{ variant: "text-accent" }}
+                    lineClamp={1}
                   >
-                    {type === "page" ? (
-                      <File
-                        fontSize="2xl"
-                        color={["blackAlpha.700", "whiteAlpha.600"]}
-                      />
-                    ) : (
-                      <Hash
-                        fontSize="2xl"
-                        color={["blackAlpha.500", "whiteAlpha.400"]}
-                      />
-                    )}
+                    {`${query}でタグ検索`}
+                  </Highlight>
+                </VStack>
+              </HStack>
 
-                    <VStack gap="0">
-                      {type === "fragment" ? (
+              {hits.length ? (
+                hits.map(({ title, type, slug, hierarchy }, index) => {
+                  // ここで+1しているのは、タグ検索を追加するため
+                  const shiftedIndex = index + 1;
+                  const isSelected = shiftedIndex === selectedIndex
+                  const ref = createRef<HTMLAnchorElement>()
+
+                  itemRefs.current.set(index, ref)
+
+                  return (
+                    <HStack
+                      as={NextLink}
+                      ref={ref}
+                      key={slug}
+                      href={slug}
+                      gap="2"
+                      borderWidth="1px"
+                      rounded="md"
+                      minH="16"
+                      py="sm"
+                      px="md"
+                      data-selected={dataAttr(isSelected)}
+                      bg={["blackAlpha.50", "whiteAlpha.50"]}
+                      transitionProperty="colors"
+                      transitionDuration="normal"
+                      _focus={{ outline: "none" }}
+                      _focusVisible={{ boxShadow: "outline" }}
+                      _hover={{ boxShadow: "outline" }}
+                      _selected={{ boxShadow: "outline" }}
+                      _active={{}}
+                      onClick={onClose}
+                      onMouseEnter={() => {
+                        eventRef.current = "mouse"
+                        setSelectedIndex(shiftedIndex)
+                      }}
+                    >
+                      {type === "page" ? (
+                        <File
+                          fontSize="2xl"
+                          color={["blackAlpha.700", "whiteAlpha.600"]}
+                        />
+                      ) : (
+                        <Hash
+                          fontSize="2xl"
+                          color={["blackAlpha.500", "whiteAlpha.400"]}
+                        />
+                      )}
+
+                      <VStack gap="0">
+                        {type === "fragment" ? (
+                          <Highlight
+                            fontSize="xs"
+                            color="muted"
+                            lineClamp={1}
+                            query={query}
+                            markProps={{ variant: "text-accent" }}
+                          >
+                            {hierarchy.lv1}
+                          </Highlight>
+                        ) : null}
+
                         <Highlight
-                          fontSize="xs"
-                          color="muted"
-                          lineClamp={1}
                           query={query}
                           markProps={{ variant: "text-accent" }}
+                          lineClamp={1}
                         >
-                          {hierarchy.lv1}
+                          {title}
                         </Highlight>
-                      ) : null}
-
-                      <Highlight
-                        query={query}
-                        markProps={{ variant: "text-accent" }}
-                        lineClamp={1}
-                      >
-                        {title}
-                      </Highlight>
-                    </VStack>
-                  </HStack>
-                )
-              })}
+                      </VStack>
+                    </HStack>
+                  )
+                })
+              ) : null}
             </VStack>
           </ModalBody>
-        ) : null}
+        )}
       </Modal>
     )
   },
