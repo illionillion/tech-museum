@@ -26,6 +26,14 @@ model Like {
   removedAt         DateTime? @map(name: "removed_at") // 削除されたいいねの管理 (論理削除)
 }
 
+model Bookmark {
+  id                Int       @id @default(autoincrement())
+  username          String    @map(name: "username") // GitHubのusernameを保存
+  articleURL        String    @map(name: "article_url") // URLで記事を一意に識別
+  createdAt         DateTime  @default(now()) @map(name: "created_at")
+  removedAt         DateTime? @map(name: "removed_at") // 削除されたいいねの管理 (論理削除)
+}
+
 // model Article {
 //   id                Int                @id @default(autoincrement())
 //   url               String             @unique
