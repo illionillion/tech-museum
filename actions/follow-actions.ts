@@ -9,11 +9,11 @@ import {
 } from "@/prisma/repositories/follow-repository"
 
 // フォローするアクション
-export const followUser = async (fromUserId: string, toUserId: string) => {
-  const alreadyFollowing = await isFollowing(fromUserId, toUserId)
+export const followUser = async (fromUsername: string, toUsername: string) => {
+  const alreadyFollowing = await isFollowing(fromUsername, toUsername)
 
   if (!alreadyFollowing) {
-    await addFollow(fromUserId, toUserId)
+    await addFollow(fromUsername, toUsername)
     return { status: "followed" }
   } else {
     return { status: "already_following" }
@@ -21,11 +21,14 @@ export const followUser = async (fromUserId: string, toUserId: string) => {
 }
 
 // フォロー解除アクション
-export const unfollowUser = async (fromUserId: string, toUserId: string) => {
-  const alreadyFollowing = await isFollowing(fromUserId, toUserId)
+export const unfollowUser = async (
+  fromUsername: string,
+  toUsername: string,
+) => {
+  const alreadyFollowing = await isFollowing(fromUsername, toUsername)
 
   if (alreadyFollowing) {
-    await removeFollow(fromUserId, toUserId)
+    await removeFollow(fromUsername, toUsername)
     return { status: "unfollowed" }
   } else {
     return { status: "not_following" }
@@ -33,6 +36,14 @@ export const unfollowUser = async (fromUserId: string, toUserId: string) => {
 }
 
 // ユーザーのフォロー一覧を取得するアクション
-export const fetchFollowingList = async (userId: string) => {
-  return await getFollowingList(userId)
+export const fetchFollowingList = async (username: string) => {
+  return await getFollowingList(username)
+}
+
+// フォローしているかを確認
+export const checkIfFollowing = async (
+  fromUsername: string,
+  toUsername: string,
+) => {
+  return await isFollowing(fromUsername, toUsername)
 }

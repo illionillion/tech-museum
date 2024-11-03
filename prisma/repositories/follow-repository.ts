@@ -3,21 +3,24 @@
 import { db } from "@/utils/db"
 
 // フォローする
-export const addFollow = async (fromUserId: string, toUserId: string) => {
+export const addFollow = async (fromUsername: string, toUsername: string) => {
   return await db.follow.create({
     data: {
-      fromUserId,
-      toUserId,
+      fromUsername,
+      toUsername,
     },
   })
 }
 
 // フォロー解除する
-export const removeFollow = async (fromUserId: string, toUserId: string) => {
+export const removeFollow = async (
+  fromUsername: string,
+  toUsername: string,
+) => {
   return await db.follow.updateMany({
     where: {
-      fromUserId,
-      toUserId,
+      fromUsername,
+      toUsername,
       removedAt: null, // 有効なフォローのみ対象
     },
     data: {
@@ -27,11 +30,11 @@ export const removeFollow = async (fromUserId: string, toUserId: string) => {
 }
 
 // フォローしているかを確認
-export const isFollowing = async (fromUserId: string, toUserId: string) => {
+export const isFollowing = async (fromUsername: string, toUsername: string) => {
   const follow = await db.follow.findFirst({
     where: {
-      fromUserId,
-      toUserId,
+      fromUsername,
+      toUsername,
       removedAt: null, // 有効なフォローのみ対象
     },
   })
@@ -39,14 +42,14 @@ export const isFollowing = async (fromUserId: string, toUserId: string) => {
 }
 
 // 特定ユーザーのフォロー一覧を取得
-export const getFollowingList = async (userId: string) => {
+export const getFollowingList = async (username: string) => {
   return await db.follow.findMany({
     where: {
-      fromUserId: userId,
+      fromUsername: username,
       removedAt: null, // 有効なフォローのみ対象
     },
     select: {
-      toUserId: true,
+      toUsername: true,
     },
   })
 }

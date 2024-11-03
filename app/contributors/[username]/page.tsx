@@ -2,7 +2,6 @@ import { GithubIcon, GitPullRequestIcon, UsersIcon } from "@yamada-ui/lucide"
 import {
   Avatar,
   Box,
-  Button,
   Card,
   CardBody,
   Center,
@@ -15,6 +14,7 @@ import {
 } from "@yamada-ui/react"
 import { getArticleList } from "../../../utils/articles"
 import { ProfileTabs } from "@/components/disclosure/profile-tabs"
+import { FollowButton } from "@/components/forms/follow-button"
 import { Layout } from "@/components/layouts"
 import { getContributors } from "@/utils/next"
 
@@ -114,13 +114,15 @@ const Page = async ({ params, searchParams }: Props) => {
                   </Center>
                 </HStack>
               </VStack>
-              <Center>
-                <Button>フォローする</Button>
-              </Center>
+              <FollowButton username={username || ""} />
             </HStack>
           </CardBody>
         </Card>
-        <ProfileTabs articles={userArticles} tabKey={tab_key} username={username} />
+        <ProfileTabs
+          articles={userArticles}
+          tabKey={tab_key}
+          username={username}
+        />
       </Container>
     </Layout>
   )
