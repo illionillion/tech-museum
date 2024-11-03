@@ -21,8 +21,8 @@ erDiagram
 
   "Follow" {
     Int id "🗝️"
-    String fromUserId
-    String toUserId
+    String fromUsername
+    String toUsername
     DateTime createdAt
     DateTime removedAt "❓"
     }

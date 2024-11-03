@@ -36,8 +36,8 @@ model Bookmark {
 
 model Follow {
   id           Int       @id @default(autoincrement())
-  fromUserId   String    @map(name: "from_user_id")
-  toUserId     String    @map(name: "to_user_id")
+  fromUsername String    @map(name: "from_username")
+  toUsername   String    @map(name: "to_username")
   createdAt    DateTime  @default(now()) @map(name: "created_at")
   removedAt    DateTime? @map(name: "removed_at") // フォロー解除日時
 }
