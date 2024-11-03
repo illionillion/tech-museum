@@ -9,47 +9,56 @@ import {
   useAsync,
   VStack,
 } from "@yamada-ui/react"
+import Link from "next/link"
 import type { FC } from "react"
 import React from "react"
 import { ArticleCard } from "../data-display/article-card"
+import { fetchBookmarksByUsername } from "@/actions/bookmark-actions"
 import { fetchArticlesByUsername } from "@/actions/like-actions"
 import type { getArticleList } from "@/utils/articles"
+import { joinArticles } from "@/utils/join-articles"
 
 interface ProfileTabsProps {
-  username: string
   articles: Awaited<ReturnType<typeof getArticleList>>
+  userArticles: Awaited<ReturnType<typeof getArticleList>>
+  tabKey?: "contributions" | "likes" | "bookmarks" | string
+  username?: string
 }
 
-export const ProfileTabs: FC<ProfileTabsProps> = ({ username, articles }) => {
+export const ProfileTabs: FC<ProfileTabsProps> = ({
+  articles,
+  userArticles,
+  tabKey,
+  username,
+}) => {
+  // デフォルトでは contributions タブを表示
+  const tabIndex = tabKey === "likes" ? 1 : tabKey === "bookmarks" ? 2 : 0
+
   const { value: likedArticles } = useAsync(async () => {
     // 例として、likedArticlesを取得する処理
     const fetchedArticles = await fetchArticlesByUsername(username || "")
-
-    const newArticles = (
-      await Promise.all(
-        articles.map(async (article) => {
-          const isLiked = fetchedArticles.some(
-            (item) => item.articleURL === article.slug,
-          )
-          return isLiked ? article : null // 一致した場合は記事を返し、一致しない場合はnull
-        }),
-      )
-    )
-      // nullを除外して最終的なlikedArticlesを得る
-      .filter((article) => article !== null)
-
-    return newArticles
+    return joinArticles(fetchedArticles, articles)
+  })
+  const { value: bookmarks } = useAsync(async () => {
+    const fetchedArticles = await fetchBookmarksByUsername(username || "")
+    return joinArticles(fetchedArticles, articles)
   })
 
   return (
-    <Tabs>
-      <Tab>コントリビュート</Tab>
-      <Tab>いいね</Tab>
-      <Tab>ブックマーク</Tab>
+    <Tabs index={tabIndex}>
+      <Tab as={Link} href={`/contributors/${username}?tab_key=contributions`}>
+        コントリビュート
+      </Tab>
+      <Tab as={Link} href={`/contributors/${username}?tab_key=likes`}>
+        いいね
+      </Tab>
+      <Tab as={Link} href={`/contributors/${username}?tab_key=bookmarks`}>
+        ブックマーク
+      </Tab>
 
       <TabPanel>
         <VStack>
-          {articles.length ? (
+          {userArticles.length ? (
             articles.map((article) => (
               <ArticleCard key={article.slug} article={article} />
             ))
@@ -72,9 +81,15 @@ export const ProfileTabs: FC<ProfileTabsProps> = ({ username, articles }) => {
         )}
       </TabPanel>
       <TabPanel>
-        <Center>
-          <Text>ブックマークした記事はありません</Text>
-        </Center>
+        {bookmarks && bookmarks.length ? (
+          bookmarks?.map((article) => (
+            <ArticleCard key={article.slug} article={article} />
+          ))
+        ) : (
+          <Center>
+            <Text>ブックマークした記事はありません</Text>
+          </Center>
+        )}
       </TabPanel>
     </Tabs>
   )

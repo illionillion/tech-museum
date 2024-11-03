@@ -9,14 +9,19 @@ import { Banner } from "@/components/navigation/banner"
 import { GithubButtons } from "@/components/navigation/github-buttons"
 import { getArticleList } from "@/utils/articles"
 
-export default async function Home() {
+interface Props {
+  searchParams: { tab_key?: string }
+}
+
+export default async function Home({ searchParams }: Props) {
+  const { tab_key } = searchParams
   const articles = await getArticleList()
   return (
     <Layout>
       <Banner />
       <HStack w="full" alignItems="start">
         <VStack w="full" gap="md">
-          <TopPageTabs articles={articles} />
+          <TopPageTabs articles={articles} tabKey={tab_key} />
         </VStack>
         <VStack
           maxW="sm"

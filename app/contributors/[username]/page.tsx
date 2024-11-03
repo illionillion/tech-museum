@@ -1,25 +1,22 @@
-import { GithubIcon, GitPullRequestIcon, UsersIcon } from "@yamada-ui/lucide"
 import {
   Avatar,
   Box,
-  Button,
   Card,
   CardBody,
-  Center,
   Container,
-  Flex,
   HStack,
-  IconButton,
-  Text,
-  VStack,
 } from "@yamada-ui/react"
 import { getArticleList } from "../../../utils/articles"
+import { fetchFollowerList, fetchFollowingList } from "@/actions/follow-actions"
+import { ProfileCard } from "@/components/data-display/profile-card"
 import { ProfileTabs } from "@/components/disclosure/profile-tabs"
+import { FollowButton } from "@/components/forms/follow-button"
 import { Layout } from "@/components/layouts"
 import { getContributors } from "@/utils/next"
 
 interface Props {
   params: { username?: string }
+  searchParams: { tab_key?: string }
 }
 
 export const dynamicParams = false
@@ -50,8 +47,10 @@ export const generateStaticParams = async () => {
   return contributors.map((contributor) => ({ username: contributor.login }))
 }
 
-const Page = async ({ params }: Props) => {
+const Page = async ({ params, searchParams }: Props) => {
   const { username } = params
+  const { tab_key } = searchParams
+
   const userData = getContributors().contributors.find(
     (user) => user.login === username,
   )
@@ -59,6 +58,9 @@ const Page = async ({ params }: Props) => {
   const userArticles = articles.filter((article) =>
     article.contributors?.some((contributor) => contributor.login === username),
   )
+
+  const followers = await fetchFollowerList(username || "")
+  const followings = await fetchFollowingList(username || "")
 
   return (
     <Layout>
@@ -69,55 +71,22 @@ const Page = async ({ params }: Props) => {
               <Box>
                 <Avatar boxSize="3xs" src={userData?.avatar_url} />
               </Box>
-              <VStack
-                flexGrow={1}
-                alignItems={{ base: "stretch", lg: "center" }}
-              >
-                <Text fontSize="md">{username}</Text>
-                <Text fontSize="sm" color={["gray.500", "gray.100"]}>
-                  {userData?.bio}
-                </Text>
-                <HStack flexDir={{ base: "row", md: "column" }}>
-                  <Center w={{ md: "full" }} gap="sm">
-                    <UsersIcon color={["gray.500", "gray.100"]} />
-                    <Flex>
-                      <Text>1234</Text>
-                      <Text color={["gray.500", "gray.100"]}>フォロワー</Text>
-                    </Flex>
-                  </Center>
-                  <Center w={{ md: "full" }} gap="sm">
-                    <UsersIcon color={["gray.500", "gray.100"]} />
-                    <Flex>
-                      <Text>1234</Text>
-                      <Text color={["gray.500", "gray.100"]}>フォロー</Text>
-                    </Flex>
-                  </Center>
-                  <Center w={{ md: "full" }} gap="sm">
-                    <GitPullRequestIcon color={["gray.500", "gray.100"]} />
-                    <Flex>
-                      <Text>1234</Text>
-                      <Text color={["gray.500", "gray.100"]}>フォロワー</Text>
-                    </Flex>
-                  </Center>
-                  <Center>
-                    <IconButton
-                      variant="ghost"
-                      fontSize="4xl"
-                      icon={<GithubIcon />}
-                      as="a"
-                      target="_blank"
-                      href={userData?.html_url}
-                    />
-                  </Center>
-                </HStack>
-              </VStack>
-              <Center>
-                <Button>フォローする</Button>
-              </Center>
+              <ProfileCard
+                username={username || ""}
+                userData={userData}
+                followers={followers}
+                followings={followings}
+              />
+              <FollowButton username={username || ""} />
             </HStack>
           </CardBody>
         </Card>
-        <ProfileTabs articles={userArticles} username={username || ""} />
+        <ProfileTabs
+          articles={articles}
+          userArticles={userArticles}
+          tabKey={tab_key}
+          username={username}
+        />
       </Container>
     </Layout>
   )

@@ -19,6 +19,11 @@ import React, { useState } from "react"
 import type { FC } from "react"
 import { useLoginModal } from "../overlay/use-login-modal"
 import {
+  checkIfBookmarked,
+  fetchBookmarkCount,
+  toggleBookmark
+} from "@/actions/bookmark-actions"
+import {
   checkIfLiked,
   fetchLikeCount,
   toggleLike,
@@ -27,15 +32,19 @@ import {
 interface ArticleButtonsProps {
   metadata: ArticleMetadata | undefined
   likeCount: number
+  bookmarkCount: number
 }
 
 export const ArticleButtons: FC<ArticleButtonsProps> = ({
   metadata,
   likeCount: like,
+  bookmarkCount: bookmark,
 }) => {
   const { data: session, status } = useSession()
   const [isLiked, setIsLiked] = useState(false)
   const [likeCount, setLikeCount] = useState(like)
+  const [isBookmarked, setIsBookmarked] = useState(false)
+  const [bookmarkCount, setBookmarkCount] = useState(bookmark)
   const { LoginModal, onOpen } = useLoginModal()
 
   const fetchLikeData = async () => {
@@ -51,8 +60,22 @@ export const ArticleButtons: FC<ArticleButtonsProps> = ({
       setIsLiked(liked)
     }
   }
+  const fetchBookmarkData = async () => {
+    if (!metadata?.slug) return
+
+    // ブクマ数を取得
+    const count = await fetchBookmarkCount(metadata.slug)
+    setBookmarkCount(count)
+
+    // 現在のブクマ状態を確認
+    if (session?.user?.name) {
+      const bookmarked = await checkIfBookmarked(session.user.name, metadata.slug)
+      setIsBookmarked(bookmarked)
+    }
+  }
   useSafeLayoutEffect(() => {
     fetchLikeData()
+    fetchBookmarkData()
   }, [metadata?.slug, session])
 
   const handleLike = async () => {
@@ -62,6 +85,18 @@ export const ArticleButtons: FC<ArticleButtonsProps> = ({
       setIsLiked(result.status === "added")
       setLikeCount((prev) => (result.status === "added" ? prev + 1 : prev - 1))
       fetchLikeData()
+    } else if (!session?.user?.name) {
+      // 未ログイン状態の時にログインしてのモーダルを起動
+      onOpen()
+    }
+  }
+  const handleBookmark = async () => {
+    if (status === "loading") return
+    if (session?.user?.name && metadata?.slug) {
+      const result = await toggleBookmark(session.user.name, metadata.slug)
+      setIsBookmarked(result.status === "added")
+      setBookmarkCount((prev) => (result.status === "added" ? prev + 1 : prev - 1))
+      fetchBookmarkData()
     } else if (!session?.user?.name) {
       // 未ログイン状態の時にログインしてのモーダルを起動
       onOpen()
@@ -90,15 +125,16 @@ export const ArticleButtons: FC<ArticleButtonsProps> = ({
             icon={<ThumbsUpIcon color={isLiked ? "primary" : "gray"} />}
           />
         </Indicator>
-        <IconButton
-          variant="ghost"
-          colorScheme="primary"
-          fontSize="3xl"
-          boxSize="10"
-          as={Link}
-          href="#"
-          icon={<BookMarkedIcon />}
-        />
+        <Indicator label={bookmarkCount}>
+          <IconButton
+            variant="ghost"
+            colorScheme="primary"
+            fontSize="3xl"
+            boxSize="10"
+            onClick={handleBookmark}
+            icon={<BookMarkedIcon color={isBookmarked ? "primary" : "gray"} />}
+          />
+        </Indicator>
         <IconButton
           variant="ghost"
           colorScheme="primary"
