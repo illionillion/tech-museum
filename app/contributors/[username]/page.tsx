@@ -20,6 +20,7 @@ import { getContributors } from "@/utils/next"
 
 interface Props {
   params: { username?: string }
+  searchParams: { tab_key?: string }
 }
 
 export const dynamicParams = false
@@ -50,8 +51,10 @@ export const generateStaticParams = async () => {
   return contributors.map((contributor) => ({ username: contributor.login }))
 }
 
-const Page = async ({ params }: Props) => {
+const Page = async ({ params, searchParams }: Props) => {
   const { username } = params
+  const { tab_key } = searchParams
+
   const userData = getContributors().contributors.find(
     (user) => user.login === username,
   )
@@ -117,7 +120,7 @@ const Page = async ({ params }: Props) => {
             </HStack>
           </CardBody>
         </Card>
-        <ProfileTabs articles={userArticles} username={username || ""} />
+        <ProfileTabs articles={userArticles} tabKey={tab_key} username={username} />
       </Container>
     </Layout>
   )
