@@ -82,7 +82,8 @@ const Page = async ({ params, searchParams }: Props) => {
           </CardBody>
         </Card>
         <ProfileTabs
-          articles={userArticles}
+          articles={articles}
+          userArticles={userArticles}
           tabKey={tab_key}
           username={username}
         />
