@@ -6,6 +6,7 @@ import {
   Link,
   Loading,
   Menu,
+  MenuButton,
   MenuItem,
   MenuList,
 } from "@yamada-ui/react"
@@ -13,12 +14,23 @@ import { useSession, signIn, signOut } from "next-auth/react"
 import React from "react"
 
 export const UserMenu = () => {
-  const { data: session } = useSession()
+  const { data: session, status } = useSession()
+
+  if (status === "loading") {
+    return <Loading />
+  }
 
   return (
-    <div>
+    <>
       {session && session.user ? (
         <Menu>
+          <MenuButton
+            as={IconButton}
+            aria-label="Open user menu"
+            variant="ghost"
+            fontSize="2xl"
+            icon={<Img src={session.user.image ?? "/default-image.png"} />}
+          />
           <MenuList>
             <MenuItem>
               <Link href="/profile">
@@ -32,43 +44,23 @@ export const UserMenu = () => {
               </Link>
             </MenuItem>
             <MenuItem>
-              <AuthButton />
+              <IconButton
+                variant="ghost"
+                fontSize="2xl"
+                icon={<LogOutIcon />}
+                onClick={() => signOut()}
+              />
             </MenuItem>
           </MenuList>
         </Menu>
       ) : (
-        <div>
-          <IconButton
-            variant="ghost"
-            fontSize="2xl"
-            // TODO: 変える
-            icon={<LogInIcon />}
-            onClick={() => {
-              signIn()
-            }}
-          />
-        </div>
+        <IconButton
+          variant="ghost"
+          fontSize="2xl"
+          icon={<LogInIcon />}
+          onClick={() => signIn()}
+        />
       )}
-    </div>
-  )
-}
-
-export const AuthButton = () => {
-  const { data: session, status } = useSession()
-  return (
-    <div>
-      {status === "loading" ? (
-        <Loading />
-      ) : (
-        session && (
-          <IconButton
-            variant="ghost"
-            fontSize="2xl"
-            icon={<LogOutIcon />}
-            onClick={() => signOut()}
-          />
-        )
-      )}
-    </div>
+    </>
   )
 }
