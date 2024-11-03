@@ -48,12 +48,11 @@ export const TopPageTabs: FC<TopPageTabsProps> = ({ articles, tabKey }) => {
     }
 
     const fetchFollows = await fetchFollowingList(session.user.name)
-    const followedUsernames = fetchFollows.map((follow) => follow.toUsername)
 
     // フォローしているユーザーの投稿をフィルタリング
     return articles.filter((article) =>
       article.contributors?.some((contributor) =>
-        followedUsernames.includes(contributor.login),
+        fetchFollows.includes(contributor.login),
       ),
     )
   }, [articles, session?.user?.name]) // 依存配列に必要な値を追加

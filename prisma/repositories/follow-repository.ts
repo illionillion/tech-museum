@@ -53,3 +53,16 @@ export const getFollowingList = async (username: string) => {
     },
   })
 }
+
+// フォロワー一覧取得
+export const getFollowerList = async (toUsername: string) => {
+  return await db.follow.findMany({
+    where: {
+      toUsername: toUsername,
+      removedAt: null, // 有効なフォロワーのみ取得
+    },
+    select: {
+      fromUsername: true, // フォロワーのユーザー名を取得
+    },
+  })
+}

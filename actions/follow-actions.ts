@@ -6,6 +6,7 @@ import {
   removeFollow,
   isFollowing,
   getFollowingList,
+  getFollowerList,
 } from "@/prisma/repositories/follow-repository"
 
 // フォローするアクション
@@ -37,7 +38,14 @@ export const unfollowUser = async (
 
 // ユーザーのフォロー一覧を取得するアクション
 export const fetchFollowingList = async (username: string) => {
-  return await getFollowingList(username)
+  const follows = await getFollowingList(username)
+  return follows.map((follow) => follow.toUsername)
+}
+
+// フォロワー一覧を取得するアクション
+export const fetchFollowerList = async (toUsername: string) => {
+  const followers = await getFollowerList(toUsername)
+  return followers.map((follower) => follower.fromUsername) // フォロワーのユーザー名のリストを返す
 }
 
 // フォローしているかを確認
