@@ -34,6 +34,14 @@ model Bookmark {
   removedAt         DateTime? @map(name: "removed_at") // 削除されたいいねの管理 (論理削除)
 }
 
+model Follow {
+  id           Int       @id @default(autoincrement())
+  fromUsername String    @map(name: "from_username")
+  toUsername   String    @map(name: "to_username")
+  createdAt    DateTime  @default(now()) @map(name: "created_at")
+  removedAt    DateTime? @map(name: "removed_at") // フォロー解除日時
+}
+
 // model Article {
 //   id                Int                @id @default(autoincrement())
 //   url               String             @unique
@@ -43,14 +51,6 @@ model Bookmark {
 //   bookmarks         Bookmark[]
 //   difficultyRatings DifficultyRating[]
 //   technicalRatings  TechnicalRating[]
-// }
-
-// model Follow {
-//   id                Int                @id @default(autoincrement())
-//   fromUserId        String              @map(name: "from_user_id")
-//   toUserId          String                @map(name: "to_user_id")
-//   createdAt         DateTime           @default(now()) @map(name: "created_at")
-//   updatedAt         DateTime           @updatedAt @map(name: "updated_at")
 // }
 
 // model Bookmark {
