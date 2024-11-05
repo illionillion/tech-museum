@@ -59,7 +59,7 @@ export const ProfileTabs: FC<ProfileTabsProps> = ({
       <TabPanel>
         <VStack>
           {userArticles.length ? (
-            articles.map((article) => (
+            userArticles.map((article) => (
               <ArticleCard key={article.slug} article={article} />
             ))
           ) : (
