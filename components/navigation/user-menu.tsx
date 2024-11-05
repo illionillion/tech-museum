@@ -1,6 +1,7 @@
 "use client"
 import { LogInIcon, LogOutIcon } from "@yamada-ui/lucide"
 import {
+  Avatar,
   IconButton,
   Img,
   Link,
@@ -33,12 +34,12 @@ export const UserMenu = () => {
           />
           <MenuList>
             <MenuItem>
-              <Link href="/profile">
+              <Link href={`${session.user.id!.toString()}`}>
                 <IconButton
                   variant="ghost"
                   fontSize="2xl"
                   icon={
-                    <Img src={session.user.image ?? "/default-image.png"} />
+                    <Avatar src={session.user.image ?? "/default-image.png"} />
                   }
                 />
               </Link>
