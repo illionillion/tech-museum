@@ -10,6 +10,7 @@ const config: NextAuthConfig = {
       profile: (profile) => {
         return {
           name: profile.login,
+          image: profile.avatar_url,
         }
       },
     }),
