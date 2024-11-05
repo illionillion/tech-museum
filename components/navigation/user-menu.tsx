@@ -30,7 +30,7 @@ export const UserMenu = () => {
             aria-label="Open user menu"
             variant="ghost"
             fontSize="2xl"
-            icon={<Img src={session.user.image ?? "/default-image.png"} />}
+            icon={<Img src={session.user.image || ""} />}
           />
           <MenuList>
             <MenuItem>
@@ -38,9 +38,7 @@ export const UserMenu = () => {
                 <IconButton
                   variant="ghost"
                   fontSize="2xl"
-                  icon={
-                    <Avatar src={session.user.image ?? "/default-image.png"} />
-                  }
+                  icon={<Avatar src={session.user.image || ""} />}
                 />
               </Link>
             </MenuItem>
