@@ -2,15 +2,16 @@
 import { LogInIcon, LogOutIcon } from "@yamada-ui/lucide"
 import {
   Avatar,
+  HStack,
   IconButton,
-  Img,
-  Link,
   Loading,
   Menu,
   MenuButton,
   MenuItem,
   MenuList,
+  Text,
 } from "@yamada-ui/react"
+import Link from "next/link"
 import { useSession, signIn, signOut } from "next-auth/react"
 import React from "react"
 
@@ -18,7 +19,7 @@ export const UserMenu = () => {
   const { data: session, status } = useSession()
 
   if (status === "loading") {
-    return <Loading />
+    return <Loading fontSize="2xl" />
   }
 
   return (
@@ -30,17 +31,18 @@ export const UserMenu = () => {
             aria-label="Open user menu"
             variant="ghost"
             fontSize="2xl"
-            icon={<Img src={session.user.image || ""} />}
+            icon={<Avatar src={session.user.image || ""} />}
           />
           <MenuList>
             <MenuItem>
-              <Link href={`${session.user.id!.toString()}`}>
+              <HStack as={Link} href={`${session.user.id!.toString()}`}>
                 <IconButton
                   variant="ghost"
                   fontSize="2xl"
                   icon={<Avatar src={session.user.image || ""} />}
                 />
-              </Link>
+                <Text>{session.user.name}</Text>
+              </HStack>
             </MenuItem>
             <MenuItem>
               <IconButton
@@ -49,6 +51,7 @@ export const UserMenu = () => {
                 icon={<LogOutIcon />}
                 onClick={() => signOut()}
               />
+              <Text>ログアウト</Text>
             </MenuItem>
           </MenuList>
         </Menu>
