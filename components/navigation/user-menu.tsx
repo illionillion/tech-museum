@@ -35,7 +35,7 @@ export const UserMenu = () => {
           />
           <MenuList>
             <MenuItem>
-              <HStack as={Link} href={`${session.user.id!.toString()}`}>
+              <HStack as={Link} href={`${session.user.name!.toString()}`}>
                 <IconButton
                   variant="ghost"
                   fontSize="2xl"
