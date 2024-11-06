@@ -2,6 +2,7 @@
 import { LogInIcon, LogOutIcon } from "@yamada-ui/lucide"
 import {
   Avatar,
+  Center,
   HStack,
   IconButton,
   Loading,
@@ -31,27 +32,26 @@ export const UserMenu = () => {
             aria-label="Open user menu"
             variant="ghost"
             fontSize="2xl"
-            icon={<Avatar src={session.user.image || ""} />}
+            icon={<Avatar src={session.user.image || ""} boxSize="full" />}
           />
           <MenuList>
             <MenuItem>
-              <HStack as={Link} href={`${session.user.name!.toString()}`}>
-                <IconButton
-                  variant="ghost"
-                  fontSize="2xl"
-                  icon={<Avatar src={session.user.image || ""} />}
-                />
+              <HStack
+                w="full"
+                as={Link}
+                href={`/contributors/${session.user.name!.toString()}`}
+              >
+                <Avatar src={session.user.image || ""} boxSize="10" />
                 <Text>{session.user.name}</Text>
               </HStack>
             </MenuItem>
-            <MenuItem>
-              <IconButton
-                variant="ghost"
-                fontSize="2xl"
-                icon={<LogOutIcon />}
-                onClick={() => signOut()}
-              />
-              <Text>ログアウト</Text>
+            <MenuItem onClick={() => signOut()}>
+              <HStack w="full">
+                <Center boxSize="10">
+                  <LogOutIcon fontSize="2xl" />
+                </Center>
+                <Text>ログアウト</Text>
+              </HStack>
             </MenuItem>
           </MenuList>
         </Menu>
