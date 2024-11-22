@@ -8,8 +8,14 @@ import {
   getLikeCount,
   getArticlesByUsername,
 } from "@/prisma/repositories/like-repository"
+import { auth } from "@/utils/auth"
 
-export const toggleLike = async (username: string, articleURL: string) => {
+export const toggleLike = async (articleURL: string) => {
+  const session = await auth()
+  const username = session?.user?.name
+  if (!username) {
+    return { status: "not_logged_in" }
+  }
   const liked = await isLiked(username, articleURL)
 
   if (liked) {

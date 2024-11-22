@@ -8,9 +8,15 @@ import {
   getFollowingList,
   getFollowerList,
 } from "@/prisma/repositories/follow-repository"
+import { auth } from "@/utils/auth"
 
 // フォローするアクション
-export const followUser = async (fromUsername: string, toUsername: string) => {
+export const followUser = async (toUsername: string) => {
+  const session = await auth()
+  const fromUsername = session?.user?.name
+  if (!fromUsername) {
+    return { status: "not_logged_in" }
+  }
   const alreadyFollowing = await isFollowing(fromUsername, toUsername)
 
   if (!alreadyFollowing) {
@@ -22,10 +28,12 @@ export const followUser = async (fromUsername: string, toUsername: string) => {
 }
 
 // フォロー解除アクション
-export const unfollowUser = async (
-  fromUsername: string,
-  toUsername: string,
-) => {
+export const unfollowUser = async (toUsername: string) => {
+  const session = await auth()
+  const fromUsername = session?.user?.name
+  if (!fromUsername) {
+    return { status: "not_logged_in" }
+  }
   const alreadyFollowing = await isFollowing(fromUsername, toUsername)
 
   if (alreadyFollowing) {
