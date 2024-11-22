@@ -48,10 +48,10 @@ export const FollowButton: FC<FollowButtonProps> = ({ username }) => {
     setIsLoading(true)
     try {
       if (isFollowing) {
-        await unfollowUser(data.user.name, username)
+        await unfollowUser(username)
         setIsFollowing(false)
       } else {
-        await followUser(data.user.name, username)
+        await followUser(username)
         setIsFollowing(true)
       }
     } catch (error) {

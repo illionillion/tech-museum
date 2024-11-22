@@ -21,7 +21,7 @@ import { useLoginModal } from "../overlay/use-login-modal"
 import {
   checkIfBookmarked,
   fetchBookmarkCount,
-  toggleBookmark
+  toggleBookmark,
 } from "@/actions/bookmark-actions"
 import {
   checkIfLiked,
@@ -69,7 +69,10 @@ export const ArticleButtons: FC<ArticleButtonsProps> = ({
 
     // 現在のブクマ状態を確認
     if (session?.user?.name) {
-      const bookmarked = await checkIfBookmarked(session.user.name, metadata.slug)
+      const bookmarked = await checkIfBookmarked(
+        session.user.name,
+        metadata.slug,
+      )
       setIsBookmarked(bookmarked)
     }
   }
@@ -80,26 +83,33 @@ export const ArticleButtons: FC<ArticleButtonsProps> = ({
 
   const handleLike = async () => {
     if (status === "loading") return
-    if (session?.user?.name && metadata?.slug) {
-      const result = await toggleLike(session.user.name, metadata.slug)
-      setIsLiked(result.status === "added")
-      setLikeCount((prev) => (result.status === "added" ? prev + 1 : prev - 1))
-      fetchLikeData()
-    } else if (!session?.user?.name) {
-      // 未ログイン状態の時にログインしてのモーダルを起動
-      onOpen()
+    if (metadata?.slug) {
+      const result = await toggleLike(metadata.slug)
+      if (result.status === "not_logged_in") {
+        // 未ログイン状態の時にログインしてのモーダルを起動
+        onOpen()
+      } else {
+        setIsLiked(result.status === "added")
+        setLikeCount((prev) =>
+          result.status === "added" ? prev + 1 : prev - 1,
+        )
+        fetchLikeData()
+      }
     }
   }
   const handleBookmark = async () => {
     if (status === "loading") return
-    if (session?.user?.name && metadata?.slug) {
-      const result = await toggleBookmark(session.user.name, metadata.slug)
-      setIsBookmarked(result.status === "added")
-      setBookmarkCount((prev) => (result.status === "added" ? prev + 1 : prev - 1))
-      fetchBookmarkData()
-    } else if (!session?.user?.name) {
-      // 未ログイン状態の時にログインしてのモーダルを起動
-      onOpen()
+    if (metadata?.slug) {
+      const result = await toggleBookmark(metadata.slug)
+      if (result.status === "not_logged_in") {
+        onOpen()
+      } else {
+        setIsBookmarked(result.status === "added")
+        setBookmarkCount((prev) =>
+          result.status === "added" ? prev + 1 : prev - 1,
+        )
+        fetchBookmarkData()
+      }
     }
   }
 

@@ -8,8 +8,14 @@ import {
   getBookmarkCount,
   getBookmarksByUsername,
 } from "@/prisma/repositories/bookmark-repository"
+import { auth } from "@/utils/auth"
 
-export const toggleBookmark = async (username: string, articleURL: string) => {
+export const toggleBookmark = async (articleURL: string) => {
+  const session = await auth()
+  const username = session?.user?.name
+  if (!username) {
+    return { status: "not_logged_in" }
+  }
   const liked = await isBookmarked(username, articleURL)
 
   if (liked) {
@@ -27,7 +33,10 @@ export const fetchBookmarkCount = async (articleURL: string) => {
 }
 
 // 現在のいいね状態を取得する関数
-export const checkIfBookmarked = async (username: string, articleURL: string) => {
+export const checkIfBookmarked = async (
+  username: string,
+  articleURL: string,
+) => {
   return await isBookmarked(username, articleURL)
 }
 
