@@ -5500,6 +5500,115 @@
     }
   },
   {
+    "title": "Dockerを用いたコンテナ開発の基本",
+    "type": "page",
+    "description": "Dockerを使用したコンテナ開発の基本について解説します。コンテナの作成からイメージの管理、コンテナの実行までの手順を詳しく紹介します。",
+    "slug": "/infra/docker/dev-with-docker-container",
+    "hierarchy": { "lv1": "Dockerを用いたコンテナ開発の基本" },
+    "keyword": ["Docker", "コンテナ開発", "イメージ管理", "DevOps"]
+  },
+  {
+    "title": "Dockerを用いたコンテナ開発の基本",
+    "type": "fragment",
+    "slug": "/infra/docker/dev-with-docker-container#dockerを用いたコンテナ開発の基本",
+    "keyword": ["Docker", "コンテナ開発", "イメージ管理", "DevOps"],
+    "hierarchy": {
+      "lv1": "Dockerを用いたコンテナ開発の基本",
+      "lv2": "Dockerを用いたコンテナ開発の基本"
+    }
+  },
+  {
+    "title": "Dockerとは",
+    "type": "fragment",
+    "slug": "/infra/docker/dev-with-docker-container#dockerとは",
+    "keyword": ["Docker", "コンテナ開発", "イメージ管理", "DevOps"],
+    "hierarchy": {
+      "lv1": "Dockerを用いたコンテナ開発の基本",
+      "lv2": "Dockerを用いたコンテナ開発の基本",
+      "lv3": "Dockerとは"
+    }
+  },
+  {
+    "title": "コンテナの作成",
+    "type": "fragment",
+    "slug": "/infra/docker/dev-with-docker-container#コンテナの作成",
+    "keyword": ["Docker", "コンテナ開発", "イメージ管理", "DevOps"],
+    "hierarchy": {
+      "lv1": "Dockerを用いたコンテナ開発の基本",
+      "lv2": "Dockerを用いたコンテナ開発の基本",
+      "lv3": "コンテナの作成"
+    }
+  },
+  {
+    "title": "1. Dockerfileの作成",
+    "type": "fragment",
+    "slug": "/infra/docker/dev-with-docker-container#1-dockerfileの作成",
+    "keyword": ["Docker", "コンテナ開発", "イメージ管理", "DevOps"],
+    "hierarchy": {
+      "lv1": "Dockerを用いたコンテナ開発の基本",
+      "lv2": "Dockerを用いたコンテナ開発の基本",
+      "lv3": "コンテナの作成",
+      "lv4": "1. Dockerfileの作成"
+    }
+  },
+  {
+    "title": "2. イメージのビルド",
+    "type": "fragment",
+    "slug": "/infra/docker/dev-with-docker-container#2-イメージのビルド",
+    "keyword": ["Docker", "コンテナ開発", "イメージ管理", "DevOps"],
+    "hierarchy": {
+      "lv1": "Dockerを用いたコンテナ開発の基本",
+      "lv2": "Dockerを用いたコンテナ開発の基本",
+      "lv3": "コンテナの作成",
+      "lv4": "2. イメージのビルド"
+    }
+  },
+  {
+    "title": "3. コンテナの実行",
+    "type": "fragment",
+    "slug": "/infra/docker/dev-with-docker-container#3-コンテナの実行",
+    "keyword": ["Docker", "コンテナ開発", "イメージ管理", "DevOps"],
+    "hierarchy": {
+      "lv1": "Dockerを用いたコンテナ開発の基本",
+      "lv2": "Dockerを用いたコンテナ開発の基本",
+      "lv3": "コンテナの作成",
+      "lv4": "3. コンテナの実行"
+    }
+  },
+  {
+    "title": "イメージの管理",
+    "type": "fragment",
+    "slug": "/infra/docker/dev-with-docker-container#イメージの管理",
+    "keyword": ["Docker", "コンテナ開発", "イメージ管理", "DevOps"],
+    "hierarchy": {
+      "lv1": "Dockerを用いたコンテナ開発の基本",
+      "lv2": "Dockerを用いたコンテナ開発の基本",
+      "lv3": "イメージの管理"
+    }
+  },
+  {
+    "title": "コンテナの操作",
+    "type": "fragment",
+    "slug": "/infra/docker/dev-with-docker-container#コンテナの操作",
+    "keyword": ["Docker", "コンテナ開発", "イメージ管理", "DevOps"],
+    "hierarchy": {
+      "lv1": "Dockerを用いたコンテナ開発の基本",
+      "lv2": "Dockerを用いたコンテナ開発の基本",
+      "lv3": "コンテナの操作"
+    }
+  },
+  {
+    "title": "まとめ",
+    "type": "fragment",
+    "slug": "/infra/docker/dev-with-docker-container#まとめ",
+    "keyword": ["Docker", "コンテナ開発", "イメージ管理", "DevOps"],
+    "hierarchy": {
+      "lv1": "Dockerを用いたコンテナ開発の基本",
+      "lv2": "Dockerを用いたコンテナ開発の基本",
+      "lv3": "まとめ"
+    }
+  },
+  {
     "title": "AWSでロードバランシングとオートスケーリングをさせる",
     "type": "page",
     "description": "AWSのロードバランシングとオートスケーリングの基本について解説します。Elastic Load BalancingとAuto Scalingの設定方法、利用のメリット、ベストプラクティスを紹介します。",
@@ -6262,115 +6371,6 @@
     "hierarchy": {
       "lv1": "AWSを使用したCI/CDパイプラインの構築",
       "lv2": "AWSを使用したCI/CDパイプラインの構築",
-      "lv3": "まとめ"
-    }
-  },
-  {
-    "title": "Dockerを用いたコンテナ開発の基本",
-    "type": "page",
-    "description": "Dockerを使用したコンテナ開発の基本について解説します。コンテナの作成からイメージの管理、コンテナの実行までの手順を詳しく紹介します。",
-    "slug": "/infra/docker/dev-with-docker-container",
-    "hierarchy": { "lv1": "Dockerを用いたコンテナ開発の基本" },
-    "keyword": ["Docker", "コンテナ開発", "イメージ管理", "DevOps"]
-  },
-  {
-    "title": "Dockerを用いたコンテナ開発の基本",
-    "type": "fragment",
-    "slug": "/infra/docker/dev-with-docker-container#dockerを用いたコンテナ開発の基本",
-    "keyword": ["Docker", "コンテナ開発", "イメージ管理", "DevOps"],
-    "hierarchy": {
-      "lv1": "Dockerを用いたコンテナ開発の基本",
-      "lv2": "Dockerを用いたコンテナ開発の基本"
-    }
-  },
-  {
-    "title": "Dockerとは",
-    "type": "fragment",
-    "slug": "/infra/docker/dev-with-docker-container#dockerとは",
-    "keyword": ["Docker", "コンテナ開発", "イメージ管理", "DevOps"],
-    "hierarchy": {
-      "lv1": "Dockerを用いたコンテナ開発の基本",
-      "lv2": "Dockerを用いたコンテナ開発の基本",
-      "lv3": "Dockerとは"
-    }
-  },
-  {
-    "title": "コンテナの作成",
-    "type": "fragment",
-    "slug": "/infra/docker/dev-with-docker-container#コンテナの作成",
-    "keyword": ["Docker", "コンテナ開発", "イメージ管理", "DevOps"],
-    "hierarchy": {
-      "lv1": "Dockerを用いたコンテナ開発の基本",
-      "lv2": "Dockerを用いたコンテナ開発の基本",
-      "lv3": "コンテナの作成"
-    }
-  },
-  {
-    "title": "1. Dockerfileの作成",
-    "type": "fragment",
-    "slug": "/infra/docker/dev-with-docker-container#1-dockerfileの作成",
-    "keyword": ["Docker", "コンテナ開発", "イメージ管理", "DevOps"],
-    "hierarchy": {
-      "lv1": "Dockerを用いたコンテナ開発の基本",
-      "lv2": "Dockerを用いたコンテナ開発の基本",
-      "lv3": "コンテナの作成",
-      "lv4": "1. Dockerfileの作成"
-    }
-  },
-  {
-    "title": "2. イメージのビルド",
-    "type": "fragment",
-    "slug": "/infra/docker/dev-with-docker-container#2-イメージのビルド",
-    "keyword": ["Docker", "コンテナ開発", "イメージ管理", "DevOps"],
-    "hierarchy": {
-      "lv1": "Dockerを用いたコンテナ開発の基本",
-      "lv2": "Dockerを用いたコンテナ開発の基本",
-      "lv3": "コンテナの作成",
-      "lv4": "2. イメージのビルド"
-    }
-  },
-  {
-    "title": "3. コンテナの実行",
-    "type": "fragment",
-    "slug": "/infra/docker/dev-with-docker-container#3-コンテナの実行",
-    "keyword": ["Docker", "コンテナ開発", "イメージ管理", "DevOps"],
-    "hierarchy": {
-      "lv1": "Dockerを用いたコンテナ開発の基本",
-      "lv2": "Dockerを用いたコンテナ開発の基本",
-      "lv3": "コンテナの作成",
-      "lv4": "3. コンテナの実行"
-    }
-  },
-  {
-    "title": "イメージの管理",
-    "type": "fragment",
-    "slug": "/infra/docker/dev-with-docker-container#イメージの管理",
-    "keyword": ["Docker", "コンテナ開発", "イメージ管理", "DevOps"],
-    "hierarchy": {
-      "lv1": "Dockerを用いたコンテナ開発の基本",
-      "lv2": "Dockerを用いたコンテナ開発の基本",
-      "lv3": "イメージの管理"
-    }
-  },
-  {
-    "title": "コンテナの操作",
-    "type": "fragment",
-    "slug": "/infra/docker/dev-with-docker-container#コンテナの操作",
-    "keyword": ["Docker", "コンテナ開発", "イメージ管理", "DevOps"],
-    "hierarchy": {
-      "lv1": "Dockerを用いたコンテナ開発の基本",
-      "lv2": "Dockerを用いたコンテナ開発の基本",
-      "lv3": "コンテナの操作"
-    }
-  },
-  {
-    "title": "まとめ",
-    "type": "fragment",
-    "slug": "/infra/docker/dev-with-docker-container#まとめ",
-    "keyword": ["Docker", "コンテナ開発", "イメージ管理", "DevOps"],
-    "hierarchy": {
-      "lv1": "Dockerを用いたコンテナ開発の基本",
-      "lv2": "Dockerを用いたコンテナ開発の基本",
       "lv3": "まとめ"
     }
   },
