@@ -109,8 +109,20 @@ jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
-    env:
-      DATABASE_URL: ${{secrets.DATABASE_URL}}
+    services:
+      db:
+        image: postgres:13
+        env:
+          POSTGRES_DB: testdb
+          POSTGRES_USER: testuser
+          POSTGRES_PASSWORD: testpass
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U testuser"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -132,9 +144,13 @@ jobs:
           pnpm install
 
       - name: Prisma migration
+        env:
+          DATABASE_URL: postgres://testuser:testpass@localhost:5432/testdb
         run: |
-          pnpm migrate:deploy
+          pnpm migrate
           pnpm generate
 
       - name: Run Build
+        env:
+          DATABASE_URL: postgres://testuser:testpass@localhost:5432/testdb
         run: pnpm run build
