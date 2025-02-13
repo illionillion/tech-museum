@@ -1,9 +1,4 @@
-import {
-  Heading,
-  Text,
-  Container,
-  Card,
-} from "@yamada-ui/react"
+import { Heading, Text, Container, Card } from "@yamada-ui/react"
 import type { FC } from "react"
 
 //参加方法

@@ -1,7 +1,4 @@
-import {
-  VStack,
-  HStack,
-} from "@yamada-ui/react"
+import { VStack, HStack } from "@yamada-ui/react"
 import { TopContributor } from "@/components/data-display/top-contributor"
 import { TopPageTabs } from "@/components/disclosure/top-page-tabs"
 import { Layout } from "@/components/layouts"

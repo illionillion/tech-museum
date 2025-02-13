@@ -342,79 +342,79 @@ const SearchModal: FC<SearchModalProps> = memo(
                 </VStack>
               </HStack>
 
-              {hits.length ? (
-                hits.map(({ title, type, slug, hierarchy }, index) => {
-                  // ここで+1しているのは、タグ検索を追加するため
-                  const shiftedIndex = index + 1;
-                  const isSelected = shiftedIndex === selectedIndex
-                  const ref = createRef<HTMLAnchorElement>()
+              {hits.length
+                ? hits.map(({ title, type, slug, hierarchy }, index) => {
+                    // ここで+1しているのは、タグ検索を追加するため
+                    const shiftedIndex = index + 1
+                    const isSelected = shiftedIndex === selectedIndex
+                    const ref = createRef<HTMLAnchorElement>()
 
-                  itemRefs.current.set(index, ref)
+                    itemRefs.current.set(index, ref)
 
-                  return (
-                    <HStack
-                      as={NextLink}
-                      ref={ref}
-                      key={slug}
-                      href={slug}
-                      gap="2"
-                      borderWidth="1px"
-                      rounded="md"
-                      minH="16"
-                      py="sm"
-                      px="md"
-                      data-selected={dataAttr(isSelected)}
-                      bg={["blackAlpha.50", "whiteAlpha.50"]}
-                      transitionProperty="colors"
-                      transitionDuration="normal"
-                      _focus={{ outline: "none" }}
-                      _focusVisible={{ boxShadow: "outline" }}
-                      _hover={{ boxShadow: "outline" }}
-                      _selected={{ boxShadow: "outline" }}
-                      _active={{}}
-                      onClick={onClose}
-                      onMouseEnter={() => {
-                        eventRef.current = "mouse"
-                        setSelectedIndex(shiftedIndex)
-                      }}
-                    >
-                      {type === "page" ? (
-                        <File
-                          fontSize="2xl"
-                          color={["blackAlpha.700", "whiteAlpha.600"]}
-                        />
-                      ) : (
-                        <Hash
-                          fontSize="2xl"
-                          color={["blackAlpha.500", "whiteAlpha.400"]}
-                        />
-                      )}
+                    return (
+                      <HStack
+                        as={NextLink}
+                        ref={ref}
+                        key={slug}
+                        href={slug}
+                        gap="2"
+                        borderWidth="1px"
+                        rounded="md"
+                        minH="16"
+                        py="sm"
+                        px="md"
+                        data-selected={dataAttr(isSelected)}
+                        bg={["blackAlpha.50", "whiteAlpha.50"]}
+                        transitionProperty="colors"
+                        transitionDuration="normal"
+                        _focus={{ outline: "none" }}
+                        _focusVisible={{ boxShadow: "outline" }}
+                        _hover={{ boxShadow: "outline" }}
+                        _selected={{ boxShadow: "outline" }}
+                        _active={{}}
+                        onClick={onClose}
+                        onMouseEnter={() => {
+                          eventRef.current = "mouse"
+                          setSelectedIndex(shiftedIndex)
+                        }}
+                      >
+                        {type === "page" ? (
+                          <File
+                            fontSize="2xl"
+                            color={["blackAlpha.700", "whiteAlpha.600"]}
+                          />
+                        ) : (
+                          <Hash
+                            fontSize="2xl"
+                            color={["blackAlpha.500", "whiteAlpha.400"]}
+                          />
+                        )}
 
-                      <VStack gap="0">
-                        {type === "fragment" ? (
+                        <VStack gap="0">
+                          {type === "fragment" ? (
+                            <Highlight
+                              fontSize="xs"
+                              color="muted"
+                              lineClamp={1}
+                              query={query}
+                              markProps={{ variant: "text-accent" }}
+                            >
+                              {hierarchy.lv1}
+                            </Highlight>
+                          ) : null}
+
                           <Highlight
-                            fontSize="xs"
-                            color="muted"
-                            lineClamp={1}
                             query={query}
                             markProps={{ variant: "text-accent" }}
+                            lineClamp={1}
                           >
-                            {hierarchy.lv1}
+                            {title}
                           </Highlight>
-                        ) : null}
-
-                        <Highlight
-                          query={query}
-                          markProps={{ variant: "text-accent" }}
-                          lineClamp={1}
-                        >
-                          {title}
-                        </Highlight>
-                      </VStack>
-                    </HStack>
-                  )
-                })
-              ) : null}
+                        </VStack>
+                      </HStack>
+                    )
+                  })
+                : null}
             </VStack>
           </ModalBody>
         )}

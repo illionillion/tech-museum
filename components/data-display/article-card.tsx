@@ -35,7 +35,15 @@ export const ArticleCard: FC<ArticleCardProps> = ({ article }) => {
           textAlign="right"
           display={{ base: "flex", sm: "none" }}
         >
-          {article?.keyword?.map((word) => <Tag href={`/tag-search?query=${encodeURIComponent(word)}`} as={Link} key={word}>{word}</Tag>)}
+          {article?.keyword?.map((word) => (
+            <Tag
+              href={`/tag-search?query=${encodeURIComponent(word)}`}
+              as={Link}
+              key={word}
+            >
+              {word}
+            </Tag>
+          ))}
         </HStack>
 
         <HStack

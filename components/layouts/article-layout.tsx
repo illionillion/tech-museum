@@ -17,11 +17,15 @@ export const ArticleLayout: FC<ArticleLayoutProps> = ({
   content,
   metadata,
   likeCount,
-  bookmarkCount
+  bookmarkCount,
 }) => {
   return (
     <HStack maxW="9xl" w="full" alignItems="start" m="auto">
-      <ArticleButtons metadata={metadata} likeCount={likeCount} bookmarkCount={bookmarkCount} />
+      <ArticleButtons
+        metadata={metadata}
+        likeCount={likeCount}
+        bookmarkCount={bookmarkCount}
+      />
       <VStack gap="md" flexGrow={1}>
         <VStack>
           <Heading>{metadata?.title}</Heading>
