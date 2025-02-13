@@ -1,11 +1,5 @@
 import { GitPullRequestIcon, InfoIcon } from "@yamada-ui/lucide"
-import {
-  Heading,
-  Button,
-  VStack,
-  Card,
-  CardBody,
-} from "@yamada-ui/react"
+import { Heading, Button, VStack, Card, CardBody } from "@yamada-ui/react"
 import type { FC } from "react"
 
 export const GithubButtons: FC = () => {

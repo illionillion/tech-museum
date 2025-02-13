@@ -2,9 +2,9 @@
 title: ASP.NET Coreの使い方
 description: ASP.NET Coreを使用した簡単なREST APIアプリケーション開発について解説します。C#プロジェクト作成からAPI作成までを解説します。
 keyword:
-    - "ASP.NET Core"
-    - "C#"
-    - "Webアプリケーション開発"
+  - "ASP.NET Core"
+  - "C#"
+  - "Webアプリケーション開発"
 ---
 
 ## ASP.NET Coreの使い方
@@ -15,11 +15,13 @@ ASP.NET Coreは、Microsoftが開発したクロスプラットフォームのWe
 Controller、Model、ViewのMVCパターンや軽量なMinimal APIなど、様々な開発スタイルに対応しています。
 
 ### ASP.NET Coreのセットアップ
+
 今回は、Minimal APIを使用して簡単なREST APIアプリケーションを作成します。Minimal APIは、ASP.NET Core 6から導入された新しい開発スタイルで、コードの記述量が少なくなります。
 
 1. .NET SDKのインストール - [.NET SDKのダウンロード](https://dotnet.microsoft.com/download)ページから最新のSDKをインストールします。
 2. Minimal APIプロジェクトの作成
-コマンドラインで以下のコマンドを実行します。
+   コマンドラインで以下のコマンドを実行します。
+
 ```bash
 dotnet new web -o MinimalApiApp
 cd MinimalApiApp
@@ -31,6 +33,7 @@ dotnet run
 ### 基本的なルーティングの設定
 
 Program.csファイルにエンドポイントを直接記述します。以下はシンプルな「Hello World」エンドポイントの例です。
+
 ```csharp
 var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
@@ -67,11 +70,13 @@ var app = builder.Build();
 
 app.MapGet("/service", (IMyService service) => service.GetMessage());
 ```
+
 ここで、IMyServiceインターフェースとその実装MyServiceを依存性注入で使用しています。
 
 ### データベースとの連携
 
 Entity Framework Coreを使ってデータベースと連携することも可能です。
+
 ```csharp
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<MyDbContext>(options =>
@@ -87,11 +92,13 @@ app.MapPost("/products", async (MyDbContext db, Product product) =>
     return Results.Created($"/products/{product.Id}", product);
 });
 ```
+
 上記のコードは、GETリクエストで全てのProductを返し、POSTリクエストで新しいProductをデータベースに追加します。
 
 ### 認証と認可
 
 Minimal APIでも認証と認可を設定できます。例えばJWTベースの認証を設定する場合、以下のように行います。
+
 ```csharp
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddAuthentication("Bearer")
@@ -108,6 +115,7 @@ app.UseAuthorization();
 
 app.MapGet("/secure-data", () => "This is secure data").RequireAuthorization();
 ```
+
 ここでは、JWT認証を設定し、/secure-dataエンドポイントに認可を要求しています。
 
 ### デプロイ方法

@@ -21,11 +21,13 @@ const Page = async ({ searchParams }: Props) => {
 
   const tags = queryArray
     .filter((i) => i)
-    .flatMap((i) => (i as string).split(",")).map((i) => i.trim())
+    .flatMap((i) => (i as string).split(","))
+    .map((i) => i.trim())
   const upperTags = tags.map((tag) => tag.toUpperCase())
 
   const articles = (await getArticleList()).filter((article) =>
-    article?.keyword?.map((word) => word.toUpperCase())
+    article?.keyword
+      ?.map((word) => word.toUpperCase())
       .some((word) => upperTags.includes(word)),
   )
 

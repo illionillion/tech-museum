@@ -62,7 +62,7 @@ export const getStaticArticleContent =
       content: content || "No content found",
       metadata: metadata,
       likeCount,
-      bookmarkCount
+      bookmarkCount,
     }
   }
 

@@ -1,9 +1,4 @@
-import {
-  Button,
-  Heading,
-  Text,
-  Container,
-} from "@yamada-ui/react"
+import { Button, Heading, Text, Container } from "@yamada-ui/react"
 import { Layout } from "@/components/layouts"
 import { CommunityIntroduction } from "@/components/tutorial/community-introduction"
 import { FeatureCard } from "@/components/tutorial/feature-card"

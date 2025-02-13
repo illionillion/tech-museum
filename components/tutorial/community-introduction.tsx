@@ -1,9 +1,4 @@
-import {
-  Button,
-  Heading,
-  Text,
-  Container,
-} from "@yamada-ui/react"
+import { Button, Heading, Text, Container } from "@yamada-ui/react"
 import type { FC } from "react"
 
 export const CommunityIntroduction: FC = () => {
